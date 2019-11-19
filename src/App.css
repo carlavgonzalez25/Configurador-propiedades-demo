@@ -1,0 +1,124 @@
+.App {
+  text-align: left;
+  font-size: 1rem;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  display: flex;
+}
+.App-link {
+  color: #09d3ac;
+}
+
+.ctLogo {
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 50%;
+}
+
+li {
+  list-style: none;
+}
+.ctInterfaz {
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: flex-start;
+  margin: 0;
+  min-height: 100vh;
+  width: 30%;
+  -webkit-box-shadow: 6px 1px 10px 0px rgba(196, 196, 196, 1);
+  -moz-box-shadow: 6px 1px 10px 0px rgba(196, 196, 196, 1);
+  box-shadow: 6px 1px 10px 0px rgba(196, 196, 196, 1);
+}
+
+.ctInterfaz li {
+  width: 100%;
+}
+
+.ftCategories:hover,
+.ctOptionText:hover {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.selected {
+  position: relative;
+  left: -20px;
+  bottom: -4px;
+}
+
+.ctOptionText {
+  padding-top: 10px;
+  display: flex;
+}
+
+.ctOptionText.grilla {
+  flex-basis: 50%;
+  border-right-color: white;
+  border-right-style: solid;
+  border-right-width: thin;
+  padding-left: 30px;
+  border-bottom-color: white;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+}
+
+.ctGralOptions {
+  background-color: #eaeef3;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 10px 0 0 35px;
+}
+.ctGralOptions.grilla {
+  flex-direction: row;
+}
+
+.ctGralOptions.open {
+  max-height: 1000px;
+  transition: max-height 0.5s ease-out;
+  transition: opacity 0.5s ease-out;
+  opacity: 1;
+}
+
+.ctGralOptions.closed {
+  max-height: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+  overflow: hidden;
+  padding: 0;
+}
+
+.ctDetalles {
+  font-size: 13px;
+  margin-right: 15px;
+  font-style: italic;
+  font-weight: 500;
+  margin-left: auto;
+}
+
+.ctDerecha {
+  width: 70%;
+  display: flex;
+  justify-content: center;
+}
+
+.ctImagen {
+  position: fixed;
+  z-index: 0;
+  margin-top: 20px;
+}
+
+.ctImagen img {
+  max-width: 100%;
+  height: auto;
+}
+
+.ctForm {
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 50px;
+}
