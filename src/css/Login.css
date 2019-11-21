@@ -1,0 +1,7 @@
+.ct-card:hover {
+  -webkit-box-shadow: 6px 1px 10px 0px rgba(196, 196, 196, 1);
+  -moz-box-shadow: 6px 1px 10px 0px rgba(196, 196, 196, 1);
+  box-shadow: 6px 1px 10px 0px rgba(196, 196, 196, 1);
+  cursor: pointer;
+  transform: translateX(-1px);
+}

@@ -6,7 +6,12 @@
   line-height: 1.5;
   letter-spacing: 0.00938em;
   display: flex;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
 }
+
 .App-link {
   color: #09d3ac;
 }
@@ -23,6 +28,10 @@ li {
 }
 .ctInterfaz {
   display: flex;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   flex-direction: column;
   justify-content: top;
   align-items: flex-start;

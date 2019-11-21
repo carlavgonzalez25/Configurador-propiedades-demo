@@ -44,6 +44,7 @@ const Categories = ({
       setAnimate("closed");
     }
     options.length > 10 && setGrilla("grilla");
+    // eslint-disable-next-line
   });
 
   return (
@@ -67,7 +68,7 @@ const Categories = ({
                 key={option.alias}
                 onClick={() => onClickOpt(alias, option, selectOpt)}
               >
-                {selectedOpt != undefined &&
+                {selectedOpt !== undefined &&
                   selectedOpt.alias === option.alias && (
                     <FontAwesomeIcon icon={faCheck} className="selected" />
                   )}

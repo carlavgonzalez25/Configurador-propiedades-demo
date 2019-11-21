@@ -1,109 +1,48 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect, Fragment } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Main from "./pages/Main";
+import Login from "./pages/Login";
 import "./App.css";
-import Categories from "./components/Categories";
 import "typeface-roboto";
-import { logoHeader, logoSolo } from "./img";
-import axios from "axios";
-import { properties } from "./const";
 
-class App extends Component {
-  state = {
-    shingles: "",
-    windows: "",
-    tileThroughout: "",
-    showerFloorTile: "",
-    cabinets: "",
-    kitchenSink: "",
-    bathroomSink: "",
-    bathroomFaucet: "",
-    interiorWallColor: "",
-    exteriorWallColor: "",
-    selected: "",
-    imgElegida: logoSolo
-  };
+const App = () => {
+  const [steps, setSteps] = useState("login");
+  console.log(steps);
 
-  selectCat = nombre => {
-    this.setState({
-      selected: nombre
-    });
-  };
-
-  selectOpt = (category, opciones) => {
-    this.setState({
-      [category]: opciones,
-      imgElegida: opciones.image_url
-    });
-  };
-
-  saveData = e => {
-    e.preventDefault();
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json;charset=UTF-8"
-    };
-
-    console.log("data stringified: " + JSON.stringify(this.state));
-    axios
-      .post(
-        "http://hicsbrightcapital.com/save.php",
-        JSON.stringify(this.state),
-        { headers: headers }
-      )
-      .then(res => {
-        console.log(" termine " + res.data);
-      });
-  };
-
-  render() {
-    return (
-      <div className="App">
-        <div className="ctInterfaz">
-          <img src={logoHeader} alt="Logo hics" className="ctLogo" />
-          {Object.keys(properties).map(category => (
-            <li key={properties[category].alias} className="list-group">
-              <Categories
-                name={properties[category].name}
-                alias={properties[category].alias}
-                options={properties[category].options}
-                selectedCat={this.state.selected}
-                selectCat={this.selectCat}
-                selectOpt={this.selectOpt}
-                selectedOpt={this.state[properties[category].alias]}
-              />
-            </li>
-          ))}
-        </div>
-        <div className="ctDerecha">
-          <div className="ctImagen">
-            <img
-              src={this.state.imgElegida}
-              alt="ventana 1"
-              className="imagen"
-            />
-          </div>
-          <form className="ctForm">
-            <fieldset>
-              <div className="form-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  aria-describedby="emailHelp"
-                  placeholder="Insert file name"
-                />
-              </div>
-              <button
-                type="submit"
-                onClick={this.saveData}
-                className="btn btn-info"
-              >
-                Guardar
-              </button>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-    );
+  if (steps === "login") {
+    return <Login />;
+  } else if (steps === "main") {
+    return <Main />;
   }
-}
+
+  /*
+  switch (steps) {
+    case "login":
+      return <Login />;
+      break;
+    case "main":
+      return <App />;
+      break;
+    default:
+      return <App />;
+  }
+*/
+
+  /*
+<Router>
+      <Link to="/">Home</Link>
+      <Link to="/configurador">App</Link>
+
+      <Switch>
+        <Route path="/Configurador">
+          <Main />
+        </Route>
+        <Route path="/">
+          <Login />
+        </Route>
+      </Switch>
+    </Router>
+ */
+};
 
 export default App;
