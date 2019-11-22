@@ -115,6 +115,10 @@ const Login = () => {
     */
   };
 
+  const changeScreen = fase => {
+    setScreen(fase);
+  };
+
   useEffect(() => {
     // retrieve users here
 
@@ -128,61 +132,63 @@ const Login = () => {
 
   if (loading) return <Spinner />;
 
-  return (
-    <Fragment>
-      {selected === "" ? ( //si no hay ningun user seleccionado
-        users.length > 0 ? (
-          <div className="ctUsers container">
-            <div className="row justify-content-between align-items-center ml-lg-5 mr-lg-5 mt-lg-5">
-              {Object.keys(users).map(name => (
+  if (screen === "user")
+    return (
+      <Fragment>
+        {selected === "" ? ( //si no hay ningun user seleccionado
+          users.length > 0 ? (
+            <div className="ctUsers container">
+              <div className="row justify-content-between align-items-center ml-lg-5 mr-lg-5 mt-lg-5">
+                {Object.keys(users).map(name => (
+                  <div
+                    className="card text-white bg-primary mb-3 col-lg-3 col-5 ml-1 mr-1 ct-card"
+                    onClick={() => retrieveProjects(users[name])}
+                  >
+                    <User key={name} name={users[name]} />
+                  </div>
+                ))}
                 <div
-                  className="card text-white bg-primary mb-3 col-lg-3 col-5 ml-1 mr-1 ct-card"
-                  onClick={() => retrieveProjects(users[name])}
+                  className="card text-white bg-primary mb-3 col-lg-3 col-5 ml-1 mr-1 ct-card" //Card crear nuevo usuario
+                  onClick={() => changeScreen("newUser")}
                 >
-                  <User key={name} name={users[name]} />
+                  <User key="new" name="New User" />
                 </div>
-              ))}
-              <div
-                className="card text-white bg-primary mb-3 col-lg-3 col-5 ml-1 mr-1 ct-card"
-                /*onClick={() => createUser(users[name])}*/
-              >
-                <User key="new" name="New User" />
               </div>
             </div>
-          </div>
-        ) : (
-          <div
-            className="card text-white bg-primary mb-3 col-lg-3 col-5 ml-1 mr-1 ct-card"
-            /*onClick={() => createUser(users[name])}*/
-          >
-            <User key="new" name="New User" />
-          </div>
-        )
-      ) : (
-        //si se selecciono un user
-        <Fragment>
-          <button
-            type="button"
-            className="btn btn-secondary"
-            onClick={deselectUser}
-          >
-            Atras
-          </button>
-          <div className="ct-projects m-auto card text-white bg-primary w-50">
-            <div class="card-header">Nombre de user</div>
+          ) : (
             <div
-              className=" card-body btn-group-vertical d-flex w-100 m-auto"
-              dataToggle="buttons"
+              className="card text-white bg-primary mb-3 col-lg-3 col-5 ml-1 mr-1 ct-card"
+              onClick={() => changeScreen("newUser")}
             >
-              {Object.keys(projects).map(name => (
-                <Project name={projects[name]} key={name} />
-              ))}
+              <User key="new" name="New User" />
             </div>
-          </div>
-        </Fragment>
-      )}
-    </Fragment>
-  );
+          )
+        ) : (
+          //si se selecciono un user
+          <Fragment>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={deselectUser}
+            >
+              Atras
+            </button>
+            <div className="ct-projects m-auto card text-white bg-primary w-50">
+              <div class="card-header">Nombre de user</div>
+              <div
+                className=" card-body btn-group-vertical d-flex w-100 m-auto"
+                dataToggle="buttons"
+              >
+                {Object.keys(projects).map(name => (
+                  <Project name={projects[name]} key={name} />
+                ))}
+              </div>
+            </div>
+          </Fragment>
+        )}
+      </Fragment>
+    );
+  else if (screen === "projects") return <div> projects</div>;
 };
 
 export default Login;
