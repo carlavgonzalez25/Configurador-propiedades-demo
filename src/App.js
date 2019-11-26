@@ -9,40 +9,15 @@ const App = () => {
   const [steps, setSteps] = useState("login");
   console.log(steps);
 
+  const changeSteps = step => {
+    setSteps(step);
+  };
+
   if (steps === "login") {
-    return <Login />;
+    return <Login changeSteps={changeSteps} />;
   } else if (steps === "main") {
-    return <Main />;
+    return <Main changeSteps={changeSteps} />;
   }
-
-  /*
-  switch (steps) {
-    case "login":
-      return <Login />;
-      break;
-    case "main":
-      return <App />;
-      break;
-    default:
-      return <App />;
-  }
-*/
-
-  /*
-<Router>
-      <Link to="/">Home</Link>
-      <Link to="/configurador">App</Link>
-
-      <Switch>
-        <Route path="/Configurador">
-          <Main />
-        </Route>
-        <Route path="/">
-          <Login />
-        </Route>
-      </Switch>
-    </Router>
- */
 };
 
 export default App;

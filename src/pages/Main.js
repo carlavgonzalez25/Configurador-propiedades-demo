@@ -109,6 +109,14 @@ class Main extends Component {
             </fieldset>
           </form>
         </div>
+        <button
+          type="button"
+          className="btn btn-secondary"
+          id="btnAtrasMain"
+          onClick={() => this.props.changeSteps("login")}
+        >
+          Atras
+        </button>
       </div>
     );
   }

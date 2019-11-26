@@ -131,3 +131,8 @@ li {
   bottom: 0;
   margin-bottom: 50px;
 }
+
+#btnAtrasMain {
+  position: fixed;
+  right: 0;
+}
