@@ -5,15 +5,16 @@ import Project from "../components/Project";
 import axios from "axios";
 import "../css/Login.css";
 
-const Login = () => {
+const Login = ({ changeSteps }) => {
   const [users, setUsers] = useState([]);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState("");
   const [screen, setScreen] = useState("user");
+  const [username, setUsername] = useState("");
 
   const retrieveUsers = () => {
-    // Chequear en el server que carpetas existen.
+    // Chequear en el server que usuarios existen.
     /*
     setLoading(true);
     const res = axios.get(`https://api.github.com/users/brad`);
@@ -34,11 +35,16 @@ const Login = () => {
         setLoading(false);
       });
       */
-    console.log(name + " " + typeof name);
     const manuel = ["casa 1", "casa 2", "casa 3"];
-    const juan = ["lechuga", "papa", "zanahoria"];
-    const pedro = ["ravioli", "gnochi", "fusilli"];
-    const mario = ["agua", "cerveza", "vino", "fernet", "whiskey"];
+    const juan = ["Modelo parana 1", "Modelo Florida", "Cliente Juan Pedro"];
+    const pedro = ["Cliente John Doe modelo 1", "Modelo Parana John"];
+    const mario = [
+      "Modelo Florida 2",
+      "Cliente Johnson Modelo 3",
+      "Modelo Florida 4",
+      "Modelo Parana",
+      "Cliente Johnson"
+    ];
     switch (name) {
       case "manuel":
         setProjects(manuel);
@@ -53,14 +59,19 @@ const Login = () => {
       case "mario":
         setProjects(mario);
         break;
+      default:
+        setProjects("");
+        break;
     }
     setSelected(name);
     setLoading(false);
+    setScreen("projects");
   };
 
   const createUser = username => {
     // Crear carpeta nueva
-    setLoading(false);
+
+    setLoading(true);
     const headers = {
       Accept: "application/json",
       "Content-Type": "application/json;charset=UTF-8"
@@ -96,6 +107,7 @@ const Login = () => {
 
   const deselectUser = () => {
     setSelected("");
+    setScreen("user");
   };
 
   const selectProject = name => {
@@ -119,10 +131,62 @@ const Login = () => {
     setScreen(fase);
   };
 
+  const checkUsername = e => {
+    // falta comprobar que comience con numero, que no contenga caracteres raros
+    let newName = e.target.value.replace(/ /g, "_");
+    console.log("new name " + newName + " value " + e.target.value);
+
+    if (newName.includes("_"))
+      document.getElementById(
+        "usernameFeedback"
+      ).innerHTML = `It will be saved as ${newName}`;
+    else document.getElementById("usernameFeedback").innerHTML = "";
+
+    if (newName === "")
+      document.getElementById("submitUsername").disabled = true;
+    else document.getElementById("submitUsername").disabled = false;
+
+    setUsername(newName);
+  };
+
+  const submitUsername = e => {
+    e.preventDefault();
+    if (username == "") {
+      console.log("empty username");
+    } else {
+      console.log("Submited name");
+
+      // Enviar el nombre por ajax para que se cree una nueva carpeta
+
+      /*
+    setLoading(true);
+    axios
+      .get("http://hicsbrightcapital.com/getData.php", {
+        params: {  user: username }
+      })
+      .then(res => {
+        setProjects(res.data);
+        console.log(" termine " + res.data);
+        setLoading(false);
+        
+      });
+    */
+      let auxUsers = users;
+      auxUsers.push(username);
+      setUsers(auxUsers);
+      setSelected(username);
+      setProjects("");
+      setScreen("projects");
+    }
+  };
+
   useEffect(() => {
     // retrieve users here
 
     setLoading(true);
+    //retrieveUsers()
+
+    // dummy data
     const data = ["manuel", "juan", "pedro", "mario"];
     setUsers(data);
     setLoading(false);
@@ -134,61 +198,103 @@ const Login = () => {
 
   if (screen === "user")
     return (
+      // EMPEZAMOS A EDITAR ACA
       <Fragment>
-        {selected === "" ? ( //si no hay ningun user seleccionado
-          users.length > 0 ? (
-            <div className="ctUsers container">
-              <div className="row justify-content-between align-items-center ml-lg-5 mr-lg-5 mt-lg-5">
-                {Object.keys(users).map(name => (
-                  <div
-                    className="card text-white bg-primary mb-3 col-lg-3 col-5 ml-1 mr-1 ct-card"
-                    onClick={() => retrieveProjects(users[name])}
-                  >
-                    <User key={name} name={users[name]} />
-                  </div>
-                ))}
+        {//si no hay ningun user seleccionado
+        users.length > 0 ? (
+          <div className="ctUsers container">
+            <div className="row justify-content-between align-items-center ml-lg-5 mr-lg-5 mt-lg-5">
+              {Object.keys(users).map(name => (
                 <div
-                  className="card text-white bg-primary mb-3 col-lg-3 col-5 ml-1 mr-1 ct-card" //Card crear nuevo usuario
-                  onClick={() => changeScreen("newUser")}
+                  className="card text-white bg-primary mb-3 col-lg-3 col-5 ml-1 mr-1 ct-card"
+                  onClick={() => retrieveProjects(users[name])}
                 >
-                  <User key="new" name="New User" />
+                  <User key={name} name={users[name]} />
                 </div>
-              </div>
-            </div>
-          ) : (
-            <div
-              className="card text-white bg-primary mb-3 col-lg-3 col-5 ml-1 mr-1 ct-card"
-              onClick={() => changeScreen("newUser")}
-            >
-              <User key="new" name="New User" />
-            </div>
-          )
-        ) : (
-          //si se selecciono un user
-          <Fragment>
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={deselectUser}
-            >
-              Atras
-            </button>
-            <div className="ct-projects m-auto card text-white bg-primary w-50">
-              <div class="card-header">Nombre de user</div>
+              ))}
               <div
-                className=" card-body btn-group-vertical d-flex w-100 m-auto"
-                dataToggle="buttons"
+                className="card text-white bg-primary mb-3 col-lg-3 col-5 ml-1 mr-1 ct-card" //Card crear nuevo usuario
+                onClick={() => changeScreen("newUser")}
               >
-                {Object.keys(projects).map(name => (
-                  <Project name={projects[name]} key={name} />
-                ))}
+                <User key="new" name="New User" />
               </div>
             </div>
-          </Fragment>
+          </div>
+        ) : (
+          <div
+            className="card text-white bg-primary mb-3 col-lg-3 col-5 ml-1 mr-1 ct-card"
+            onClick={() => changeScreen("newUser")}
+          >
+            <User key="new" name="New User" />
+          </div>
         )}
       </Fragment>
     );
-  else if (screen === "projects") return <div> projects</div>;
+  // ESTAMOS EDITANDO HASTA ACA
+  else if (screen === "projects")
+    return (
+      //si se selecciono un user
+      <Fragment>
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={deselectUser}
+        >
+          Atras
+        </button>
+        <div className="ct-projects m-auto card text-white bg-primary w-50">
+          <div className="card-header">{selected}</div>
+          <div
+            className=" card-body btn-group-vertical d-flex w-100 m-auto"
+            dataToggle="buttons"
+          >
+            {Object.keys(projects).map(name => (
+              <Project name={projects[name]} key={name} />
+            ))}
+            <Project
+              name="Create new project"
+              key="new"
+              newProject={changeSteps}
+            />
+          </div>
+        </div>
+      </Fragment>
+    );
+  else if (screen === "newUser")
+    return (
+      <Fragment>
+        <button
+          type="button"
+          className="btn btn-secondary"
+          onClick={deselectUser}
+        >
+          Atras
+        </button>
+        <div className="container">
+          <div className="form-group has-success w-50 m-auto">
+            <label className="form-control-label" htmlFor="userNameInput">
+              Enter a user name
+            </label>
+            <input
+              type="text"
+              className="form-control is-valid"
+              id="userNameInput"
+              value={username}
+              onChange={checkUsername}
+            />
+            <div className="valid-feedback" id="usernameFeedback"></div>
+            <button
+              type="submit"
+              onClick={submitUsername}
+              className="btn btn-secondary"
+              id="submitUsername"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </Fragment>
+    );
 };
 
 export default Login;
