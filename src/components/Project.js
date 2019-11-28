@@ -1,21 +1,33 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 
-const Project = ({ name, newProject }) => {
+const Project = ({ name, changeScreen, selectProject }) => {
   return (
     <button
       type="button"
-      className="btn btn-outline-secondary "
+      className={
+        "btn btn-outline-secondary " +
+        (name !== "new" && "d-flex justify-content-between ")
+      }
       onClick={
-        name == "Create new project"
+        name === "new"
           ? () => {
-              newProject("main");
+              changeScreen("main");
             }
-          : null
+          : () => {
+              selectProject(name);
+              changeScreen("main");
+            }
       }
     >
-      {name}
+      {name !== "new" ? (
+        <Fragment>
+          <span>{name}</span> <FontAwesomeIcon icon={faTrash} />
+        </Fragment>
+      ) : (
+        <FontAwesomeIcon icon={faPlus} />
+      )}
     </button>
   );
 };

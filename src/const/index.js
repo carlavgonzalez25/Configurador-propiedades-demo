@@ -459,7 +459,7 @@ const properties = {
       {
         name: "Oval Biscuit",
         description:
-          '17-5/8" x 14-3/8" x 8-1/8". White cut size oval vanity bowl. SNKFAB1714W ',
+          '17-5/8" x 14-3/8" x 8-1/8". White cut size oval vanity bowl. SNKFAB1714W',
         alias: "Biscuit cut size oval vanity bowl",
         image_url: ventana2,
         type: "Standard"
@@ -556,4 +556,81 @@ const properties = {
   }
 };
 
-export { properties };
+const configPrueba = {
+  shingles: {
+    name: "Heritage Rustic Hickory",
+    alias: "Rustic Hickory",
+    image_url: "/static/media/ventana-1.74ee1d46.PNG",
+    type: "Standard"
+  },
+  windows: "",
+  tileThroughout: {
+    name: "London Marfil 24x24",
+    alias: "margil24x24",
+    image_url: "/static/media/ventana-2.dfab7081.PNG",
+    type: "Premium"
+  },
+  showerFloorTile: {
+    name: "Cosptal Sandy Hony 12x12",
+    alias: "cosptalSandy12x12",
+    image_url: "/static/media/ventana-1.74ee1d46.PNG",
+    type: "Standard"
+  },
+  cabinets: {
+    name: "SC Shaker Cinder",
+    alias: "shakerCinder",
+    image_url: "/static/media/ventana-3.9551e0b8.PNG",
+    type: "Premium"
+  },
+  kitchenSink: {
+    name: "The Tampa",
+    description:
+      "70/30 Asymmetrical shaped single bowl. 304 stainless steel - SNKFAB103",
+    alias: "theTampa",
+    image_url: "/static/media/ventana-3.9551e0b8.PNG",
+    type: "Premium"
+  },
+  bathroomSink: {
+    name: "Rectangle White",
+    description:
+      '18-1/8" x 13" x 7-5/8" Cut size rectangle vanity bowl. SNKFAB1813W',
+    alias: "rectangleWhite",
+    image_url: "/static/media/ventana-1.74ee1d46.PNG",
+    type: "Standard"
+  },
+  bathroomFaucet: {
+    name: "Eva Chrome",
+    alias: "evaChrome",
+    image_url: "/static/media/ventana-2.dfab7081.PNG",
+    type: "Standard"
+  },
+  interiorWallColor: {
+    name: "Option 2",
+    alias: "option 2",
+    image_url: "/static/media/ventana-2.dfab7081.PNG",
+    type: "optional"
+  },
+  exteriorWallColor: {
+    name: "Option 3",
+    alias: "option 3",
+    image_url: "/static/media/ventana-1.74ee1d46.PNG",
+    type: "optional"
+  },
+  selected: "exteriorWallColor",
+  imgElegida: "/static/media/ventana-1.74ee1d46.PNG",
+  step: "save",
+  graniteEdge: {
+    name: "1/4 Bevel",
+    alias: "bevel",
+    image_url: "/static/media/ventana-2.dfab7081.PNG",
+    type: "Standard"
+  },
+  grout: {
+    name: "Harvest",
+    alias: "harvest",
+    image_url: "/static/media/ventana-1.74ee1d46.PNG",
+    type: "Standard"
+  }
+};
+
+export { properties, configPrueba };

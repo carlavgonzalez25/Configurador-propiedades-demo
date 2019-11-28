@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "../App.css";
 import Categories from "../components/Categories";
 import "typeface-roboto";
@@ -19,10 +19,20 @@ class Main extends Component {
     interiorWallColor: "",
     exteriorWallColor: "",
     selected: "",
-    imgElegida: logoSolo
+    imgElegida: logoSolo,
+    step: "configurate"
   };
 
   componentDidMount() {
+    //console.dir(this.props.config);
+    Object.keys(this.props.config).map(key => {
+      if (this.state.hasOwnProperty(key))
+        this.setState({
+          [key]: this.props.config[key]
+        });
+    });
+    this.state.step = "configurate";
+
     /*
       this.props.type // casa nueva o a editar? 
       this.props.data // data de la casa cargada
@@ -59,7 +69,14 @@ class Main extends Component {
       )
       .then(res => {
         console.log(" termine " + res.data);
+        alert("Guardado");
       });
+  };
+
+  changeSteps = step => {
+    this.setState({
+      step: step
+    });
   };
 
   render() {
@@ -81,42 +98,87 @@ class Main extends Component {
             </li>
           ))}
         </div>
-        <div className="ctDerecha">
-          <div className="ctImagen">
-            <img
-              src={this.state.imgElegida}
-              alt="ventana 1"
-              className="imagen"
-            />
-          </div>
-          <form className="ctForm">
-            <fieldset>
-              <div className="form-group">
-                <input
-                  type="text"
-                  className="form-control"
-                  aria-describedby="emailHelp"
-                  placeholder="Insert file name"
+        {this.state.step === "configurate" ? (
+          <Fragment>
+            <div className="ctDerecha">
+              <div className="ctImagen">
+                <img
+                  src={this.state.imgElegida}
+                  alt="ventana 1"
+                  className="imagen"
                 />
               </div>
               <button
                 type="submit"
-                onClick={this.saveData}
-                className="btn btn-info"
+                onClick={() => this.changeSteps("save")}
+                className="btn btn-info btnSave"
               >
                 Guardar
               </button>
-            </fieldset>
-          </form>
-        </div>
-        <button
-          type="button"
-          className="btn btn-secondary"
-          id="btnAtrasMain"
-          onClick={() => this.props.changeSteps("login")}
-        >
-          Atras
-        </button>
+            </div>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              id="btnAtrasMain"
+              onClick={() => this.props.changeSteps("login")}
+            >
+              Atras
+            </button>
+          </Fragment>
+        ) : (
+          this.state.step === "save" && (
+            <form className="ctDerecha">
+              <fieldset className="w-75 m-5">
+                <legend>Save project</legend>
+                <div className="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="inputEmail"
+                    placeholder="Enter email"
+                  />
+                </div>
+                <div className="form-group">
+                  <label for="inputName">Name</label>
+                  <input
+                    type="name"
+                    className="form-control"
+                    id="inputName"
+                    placeholder="Enter name"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="inputPhone">Phone</label>
+                  <input
+                    type="telephone"
+                    className="form-control"
+                    id="inputPhone"
+                    placeholder="Enter phone number"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea
+                    className="form-control"
+                    id="description"
+                    rows="3"
+                  ></textarea>
+                </div>
+
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  onClick={this.saveData}
+                >
+                  Save
+                </button>
+              </fieldset>
+            </form>
+          )
+        )}
       </div>
     );
   }

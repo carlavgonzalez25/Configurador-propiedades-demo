@@ -4,8 +4,9 @@ import User from "../components/User";
 import Project from "../components/Project";
 import axios from "axios";
 import "../css/Login.css";
+import { configPrueba } from "../const";
 
-const Login = ({ changeSteps }) => {
+const Login = ({ changeSteps, loadConfig }) => {
   const [users, setUsers] = useState([]);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -105,14 +106,14 @@ const Login = ({ changeSteps }) => {
       });
   };
 
-  const deselectUser = () => {
-    setSelected("");
-    setScreen("user");
-  };
-
   const selectProject = name => {
     // hacer axios request y obtener los datos del JSON
     setLoading(true);
+    loadConfig(configPrueba);
+    setLoading(false);
+    console.dir(configPrueba);
+
+    // Guardar los datos en un objeto y pasarlo a loadConfig
 
     /*
     axios
@@ -120,11 +121,16 @@ const Login = ({ changeSteps }) => {
         params: { name: name, user: selected }
       })
       .then(res => {
-        setProjects(res.data);
         console.log(" termine " + res.data);
+        loadConfig(res.data)
         setLoading(false);
       });
     */
+  };
+
+  const deselectUser = () => {
+    setSelected("");
+    setScreen("user");
   };
 
   const changeScreen = fase => {
@@ -151,7 +157,7 @@ const Login = ({ changeSteps }) => {
 
   const submitUsername = e => {
     e.preventDefault();
-    if (username == "") {
+    if (username === "") {
       console.log("empty username");
     } else {
       console.log("Submited name");
@@ -208,6 +214,7 @@ const Login = ({ changeSteps }) => {
                 <div
                   className="card text-white bg-primary mb-3 col-lg-3 col-5 ml-1 mr-1 ct-card"
                   onClick={() => retrieveProjects(users[name])}
+                  key={name}
                 >
                   <User key={name} name={users[name]} />
                 </div>
@@ -248,14 +255,15 @@ const Login = ({ changeSteps }) => {
             className=" card-body btn-group-vertical d-flex w-100 m-auto"
             dataToggle="buttons"
           >
+            <Project name="new" key="new" changeScreen={changeSteps} />
             {Object.keys(projects).map(name => (
-              <Project name={projects[name]} key={name} />
+              <Project
+                name={projects[name]}
+                key={name}
+                selectProject={selectProject}
+                changeScreen={changeSteps}
+              />
             ))}
-            <Project
-              name="Create new project"
-              key="new"
-              newProject={changeSteps}
-            />
           </div>
         </div>
       </Fragment>
