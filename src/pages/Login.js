@@ -109,9 +109,8 @@ const Login = ({ changeSteps, loadConfig }) => {
   const selectProject = name => {
     // hacer axios request y obtener los datos del JSON
     setLoading(true);
-    loadConfig(configPrueba);
+    name === "new" ? loadConfig("new") : loadConfig(configPrueba);
     setLoading(false);
-    console.dir(configPrueba);
 
     // Guardar los datos en un objeto y pasarlo a loadConfig
 
@@ -255,7 +254,12 @@ const Login = ({ changeSteps, loadConfig }) => {
             className=" card-body btn-group-vertical d-flex w-100 m-auto"
             dataToggle="buttons"
           >
-            <Project name="new" key="new" changeScreen={changeSteps} />
+            <Project
+              name="new"
+              key="new"
+              changeScreen={changeSteps}
+              selectProject={selectProject}
+            />
             {Object.keys(projects).map(name => (
               <Project
                 name={projects[name]}

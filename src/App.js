@@ -8,7 +8,6 @@ import "typeface-roboto";
 const App = () => {
   const [steps, setSteps] = useState("login");
   const [config, setConfig] = useState("");
-  console.log(steps);
 
   const changeSteps = step => {
     setSteps(step);

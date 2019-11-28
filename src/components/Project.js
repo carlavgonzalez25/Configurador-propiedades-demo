@@ -14,6 +14,7 @@ const Project = ({ name, changeScreen, selectProject }) => {
         name === "new"
           ? () => {
               changeScreen("main");
+              selectProject("new");
             }
           : () => {
               selectProject(name);

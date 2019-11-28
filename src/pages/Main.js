@@ -9,7 +9,6 @@ import { properties } from "../const";
 class Main extends Component {
   state = {
     shingles: "",
-    windows: "",
     tileThroughout: "",
     showerFloorTile: "",
     cabinets: "",
@@ -18,6 +17,8 @@ class Main extends Component {
     bathroomFaucet: "",
     interiorWallColor: "",
     exteriorWallColor: "",
+    graniteEdge: "",
+    grout: "",
     selected: "",
     imgElegida: logoSolo,
     step: "configurate"
@@ -25,13 +26,33 @@ class Main extends Component {
 
   componentDidMount() {
     //console.dir(this.props.config);
-    Object.keys(this.props.config).map(key => {
-      if (this.state.hasOwnProperty(key))
-        this.setState({
-          [key]: this.props.config[key]
-        });
+    //primero limpiar el state, luego cargar
+
+    this.setState({
+      shingles: "",
+      tileThroughout: "",
+      showerFloorTile: "",
+      cabinets: "",
+      kitchenSink: "",
+      bathroomSink: "",
+      bathroomFaucet: "",
+      interiorWallColor: "",
+      exteriorWallColor: "",
+      selected: "",
+      graniteEdge: "",
+      grout: "",
+      imgElegida: logoSolo,
+      step: "configurate"
     });
-    this.state.step = "configurate";
+    console.log("config es " + this.props.config);
+
+    this.props.config !== "new" &&
+      Object.keys(this.props.config).map(key => {
+        if (this.state.hasOwnProperty(key) && key !== "step")
+          this.setState({
+            [key]: this.props.config[key]
+          });
+      });
 
     /*
       this.props.type // casa nueva o a editar? 
@@ -94,6 +115,9 @@ class Main extends Component {
                 selectCat={this.selectCat}
                 selectOpt={this.selectOpt}
                 selectedOpt={this.state[properties[category].alias]}
+                hasSelectedOpt={
+                  this.state[category] !== "" ? this.state[category] : "empty"
+                }
               />
             </li>
           ))}
@@ -127,56 +151,66 @@ class Main extends Component {
           </Fragment>
         ) : (
           this.state.step === "save" && (
-            <form className="ctDerecha">
-              <fieldset className="w-75 m-5">
-                <legend>Save project</legend>
-                <div className="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="inputEmail"
-                    placeholder="Enter email"
-                  />
-                </div>
-                <div className="form-group">
-                  <label for="inputName">Name</label>
-                  <input
-                    type="name"
-                    className="form-control"
-                    id="inputName"
-                    placeholder="Enter name"
-                  />
-                </div>
+            <Fragment>
+              <form className="ctDerecha">
+                <fieldset className="w-75 m-5">
+                  <legend>Save project</legend>
+                  <div className="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="inputEmail"
+                      placeholder="Enter email"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label for="inputName">Name</label>
+                    <input
+                      type="name"
+                      className="form-control"
+                      id="inputName"
+                      placeholder="Enter name"
+                    />
+                  </div>
 
-                <div class="form-group">
-                  <label for="inputPhone">Phone</label>
-                  <input
-                    type="telephone"
-                    className="form-control"
-                    id="inputPhone"
-                    placeholder="Enter phone number"
-                  />
-                </div>
+                  <div class="form-group">
+                    <label for="inputPhone">Phone</label>
+                    <input
+                      type="telephone"
+                      className="form-control"
+                      id="inputPhone"
+                      placeholder="Enter phone number"
+                    />
+                  </div>
 
-                <div class="form-group">
-                  <label for="description">Description</label>
-                  <textarea
-                    className="form-control"
-                    id="description"
-                    rows="3"
-                  ></textarea>
-                </div>
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea
+                      className="form-control"
+                      id="description"
+                      rows="3"
+                    ></textarea>
+                  </div>
 
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  onClick={this.saveData}
-                >
-                  Save
-                </button>
-              </fieldset>
-            </form>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    onClick={this.saveData}
+                  >
+                    Save
+                  </button>
+                </fieldset>
+              </form>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                id="btnAtrasSave"
+                onClick={() => this.changeSteps("configurate")}
+              >
+                Atras
+              </button>
+            </Fragment>
           )
         )}
       </div>

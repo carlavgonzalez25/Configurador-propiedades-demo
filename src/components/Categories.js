@@ -26,7 +26,8 @@ const Categories = ({
   selectCat,
   selectedCat,
   selectOpt,
-  selectedOpt
+  selectedOpt,
+  hasSelectedOpt
 }) => {
   const [active, setActive] = useState(false);
   const [classActive, setClass] = useState("");
@@ -44,38 +45,51 @@ const Categories = ({
       setAnimate("closed");
     }
     options.length > 10 && setGrilla("grilla");
+    // console.dir(hasSelectedOpt);
+
     // eslint-disable-next-line
   });
 
   return (
     <Fragment>
-      <span
-        className={
-          "ftCategories list-group-item list-group-item-action " + classActive
-        }
-        onClick={() =>
-          onClickCat(selectedCat, alias, selectCat, selectedOpt, selectOpt)
-        }
-      >
-        {name}
-      </span>
-      <div className={"ctGralOptions " + animate + " " + grilla}>
-        {active && // si la categoria seleccionada es esta, entonces mostrar opciones
-          options.map(option => (
-            <Fragment>
-              <span
-                className={"ctOptionText " + grilla}
-                key={option.alias}
-                onClick={() => onClickOpt(alias, option, selectOpt)}
-              >
-                {selectedOpt !== undefined &&
-                  selectedOpt.alias === option.alias && (
-                    <FontAwesomeIcon icon={faCheck} className="selected" />
-                  )}
-                <Options {...option} key={option.name} />
-              </span>
-            </Fragment>
-          ))}
+      <div>
+        <div className="d-flex">
+          <div
+            className={
+              "ftCategories list-group-item list-group-item-action " +
+              classActive
+            }
+            onClick={() =>
+              onClickCat(selectedCat, alias, selectCat, selectedOpt, selectOpt)
+            }
+          >
+            <p> {name} </p>
+          </div>
+          <span
+            className={
+              "progreso " + (hasSelectedOpt === "empty" ? "missing" : "done")
+            }
+          ></span>
+        </div>
+
+        <div className={"ctGralOptions " + animate + " " + grilla}>
+          {active && // si la categoria seleccionada es esta, entonces mostrar opciones
+            options.map(option => (
+              <Fragment>
+                <span
+                  className={"ctOptionText " + grilla}
+                  key={option.alias}
+                  onClick={() => onClickOpt(alias, option, selectOpt)}
+                >
+                  {selectedOpt !== undefined &&
+                    selectedOpt.alias === option.alias && (
+                      <FontAwesomeIcon icon={faCheck} className="selected" />
+                    )}
+                  <Options {...option} key={option.name} />
+                </span>
+              </Fragment>
+            ))}
+        </div>
       </div>
     </Fragment>
   );
