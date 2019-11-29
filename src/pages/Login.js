@@ -15,7 +15,7 @@ const Login = ({ changeSteps, loadConfig }) => {
   const [username, setUsername] = useState("");
 
   const retrieveUsers = () => {
-    // Chequear en el server que usuarios existen.
+    // Chequear  que usuarios existen.
     /*
     setLoading(true);
     const res = axios.get(`https://api.github.com/users/brad`);
@@ -25,6 +25,9 @@ const Login = ({ changeSteps, loadConfig }) => {
   };
   const retrieveProjects = name => {
     setLoading(true);
+
+    // obtener un array con todos los nombres de proyectos guardados para este user en particular
+
     /*
     axios
       .get("http://hicsbrightcapital.com/getProjects.php", {
@@ -70,8 +73,8 @@ const Login = ({ changeSteps, loadConfig }) => {
   };
 
   const createUser = username => {
-    // Crear carpeta nueva
-
+    // Crear usuario nuevo
+    /*
     setLoading(true);
     const headers = {
       Accept: "application/json",
@@ -86,6 +89,7 @@ const Login = ({ changeSteps, loadConfig }) => {
         console.log(" termine " + res.data);
         setLoading(false);
       });
+      */
   };
 
   const createProject = name => {
@@ -107,9 +111,10 @@ const Login = ({ changeSteps, loadConfig }) => {
   };
 
   const selectProject = name => {
-    // hacer axios request y obtener los datos del JSON
+    // hacer  request y obtener los datos de este proyecto en particular
+
     setLoading(true);
-    name === "new" ? loadConfig("new") : loadConfig(configPrueba);
+    name === "new" ? loadConfig("new") : loadConfig(configPrueba); // si no es un archivo nuevo, cargar datos almacenados
     setLoading(false);
 
     // Guardar los datos en un objeto y pasarlo a loadConfig

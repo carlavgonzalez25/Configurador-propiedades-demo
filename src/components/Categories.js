@@ -3,16 +3,24 @@ import Options from "./Options";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import smoothscroll from "smoothscroll-polyfill";
 
-const onClickCat = (selectedCat, alias, selectCat, selectedOpt, selectOpt) => {
+const onClickCat = (
+  selectedCat,
+  alias,
+  selectCat,
+  selectedOpt,
+  showImage,
+  e
+) => {
   selectedCat === alias ? selectCat("") : selectCat(alias);
 
-  if (typeof selectedOpt == "object") {
-    //hay algo seleccionado
-    selectOpt(selectedOpt.alias, selectedOpt); // pasarle alias y la opcion. Sacarla del objeto
-
-    // aca hacer que una clase se agregue y modifique el nombre de la opcion
+  console.log(typeof selectedOpt);
+  if (typeof selectedOpt === "object" && selectedOpt !== null) {
+    //si hay algo seleccionado, mostrar la iamgen asociada
+    showImage(selectedOpt);
   }
+  e.target.scrollIntoView({ behavior: "smooth" });
 };
 
 const onClickOpt = (alias, option, selectOpt) => {
@@ -25,6 +33,7 @@ const Categories = ({
   options,
   selectCat,
   selectedCat,
+  showImage,
   selectOpt,
   selectedOpt,
   hasSelectedOpt
@@ -45,7 +54,8 @@ const Categories = ({
       setAnimate("closed");
     }
     options.length > 10 && setGrilla("grilla");
-    // console.dir(hasSelectedOpt);
+
+    smoothscroll.polyfill(); // iniciar smootscroll
 
     // eslint-disable-next-line
   });
@@ -59,8 +69,15 @@ const Categories = ({
               "ftCategories list-group-item list-group-item-action " +
               classActive
             }
-            onClick={() =>
-              onClickCat(selectedCat, alias, selectCat, selectedOpt, selectOpt)
+            onClick={e =>
+              onClickCat(
+                selectedCat,
+                alias,
+                selectCat,
+                selectedOpt,
+                showImage,
+                e
+              )
             }
           >
             <p> {name} </p>

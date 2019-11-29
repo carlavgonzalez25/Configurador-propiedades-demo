@@ -158,7 +158,7 @@ const properties = {
       {
         name: "Irish Cream",
         alias: "irishCream",
-        image_url: ventana1,
+        image_url: ventana2,
         type: "Standard"
       },
       {
@@ -558,74 +558,49 @@ const properties = {
 
 const configPrueba = {
   shingles: {
-    name: "Heritage Rustic Hickory",
-    alias: "Rustic Hickory",
-    image_url: "/app/static/media/ventana-1.74ee1d46.PNG",
+    name: "Heritage Shadow Grey",
+    alias: "Shadow Grey",
+    image_url: "/static/media/ventana-2.dfab7081.PNG",
     type: "Standard"
   },
   tileThroughout: {
-    name: "Madrid Beige 20x20",
-    alias: "beige20x20",
-    image_url: "/app/static/media/ventana-1.74ee1d46.PNG",
-    type: "Standard"
+    name: "London Marfil 24x24",
+    alias: "margil24x24",
+    image_url: "/static/media/ventana-2.dfab7081.PNG",
+    type: "Premium"
   },
   showerFloorTile: {
     name: "Pebble Earth 12x12",
     alias: "pebbleEarth12x12",
-    image_url: "/app/static/media/ventana-3.9551e0b8.PNG",
+    image_url: "/static/media/ventana-3.9551e0b8.PNG",
     type: "Standard"
   },
-  cabinets: {
-    name: "Portland Chestnut",
-    alias: "portlandChesnut",
-    image_url: "/app/static/media/ventana-1.74ee1d46.PNG",
-    type: "Standard"
-  },
-  kitchenSink: {
-    name: "The Pompano",
-    description: "30/18 Standard large single bowl sink. 304 Stainless steel",
-    alias: "thePompano",
-    image_url: "/app/static/media/ventana-3.9551e0b8.PNG",
-    type: "Standard"
-  },
-  bathroomSink: {
-    name: "Oval White",
-    description:
-      '17-5/8" x 14-3/8" x 8-1/8". White cut size oval vanity bowl. SNKFAB1714W ',
-    alias: "White cut size oval vanity bowl",
-    image_url: "/app/static/media/ventana-3.9551e0b8.PNG",
-    type: "Standard"
-  },
+  cabinets: "",
+  kitchenSink: "",
+  bathroomSink: "",
   bathroomFaucet: {
     name: "Eva Brushed Nickel",
     alias: "Eva brushed nickel",
-    image_url: "/app/static/media/ventana-3.9551e0b8.PNG",
+    image_url: "/static/media/ventana-3.9551e0b8.PNG",
     type: "Standard"
   },
-  interiorWallColor: {
-    name: "Option 1",
-    alias: "option 1",
-    image_url: "/app/static/media/ventana-3.9551e0b8.PNG",
-    type: "optional"
-  },
-  exteriorWallColor: {
-    name: "Option 1",
-    alias: "option 1",
-    image_url: "/app/static/media/ventana-3.9551e0b8.PNG",
-    type: "optional"
-  },
+  interiorWallColor: "",
+  exteriorWallColor: "",
   graniteEdge: {
-    name: "Flat",
-    alias: "flat",
-    image_url: "/app/static/media/ventana-1.74ee1d46.PNG",
-    type: "Standard"
+    name: "Ogee",
+    alias: "ogee",
+    image_url: "/static/media/ventana-1.74ee1d46.PNG",
+    type: "Premium"
   },
   grout: {
-    name: "White",
-    alias: "white",
-    image_url: "/app/static/media/ventana-1.74ee1d46.PNG",
+    name: "Havana Tan",
+    alias: "havanaTan",
+    image_url: "/static/media/ventana-1.74ee1d46.PNG",
     type: "Standard"
-  }
+  },
+  selected: "bathroomFaucet",
+  imgElegida: "/app/static/media/ventana-3.9551e0b8.PNG",
+  step: "save"
 };
 
 export { properties, configPrueba };

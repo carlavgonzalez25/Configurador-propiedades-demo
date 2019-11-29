@@ -5,6 +5,7 @@ import "typeface-roboto";
 import { logoHeader, logoSolo } from "../img";
 import axios from "axios";
 import { properties } from "../const";
+import Alert from "../components/Alert";
 
 class Main extends Component {
   state = {
@@ -68,8 +69,15 @@ class Main extends Component {
   };
 
   selectOpt = (category, opciones) => {
+    this.state.hasOwnProperty(category) &&
+      this.setState({
+        [category]: opciones,
+        imgElegida: opciones.image_url
+      });
+  };
+
+  showImage = opciones => {
     this.setState({
-      [category]: opciones,
       imgElegida: opciones.image_url
     });
   };
@@ -81,16 +89,32 @@ class Main extends Component {
       "Content-Type": "application/json;charset=UTF-8"
     };
 
-    console.log("data stringified: " + JSON.stringify(this.state));
+    //recorremos todo el array para modificar la url de las imagenes y agregarle el /app/
+
+    let aux = this.state;
+
+    /*
+    Object.keys(aux).map(
+      key =>
+        aux[key].hasOwnProperty(
+          "image_url"
+        ) aux[key].image_url = aux[key].image_url.replace("app/", "") &&
+        (aux[key].image_url = "app" + aux[key].image_url)
+    );
+*/
+    console.log("data stringified: " + JSON.stringify(aux));
+
     axios
-      .post(
-        "http://hicsbrightcapital.com/save.php",
-        JSON.stringify(this.state),
-        { headers: headers }
-      )
+      .post("http://hicsbrightcapital.com/save.php", JSON.stringify(aux), {
+        headers: headers
+      })
       .then(res => {
         console.log(" termine " + res.data);
+
         alert("Guardado");
+      })
+      .catch(error => {
+        alert(error);
       });
   };
 
@@ -114,6 +138,7 @@ class Main extends Component {
                 selectedCat={this.state.selected}
                 selectCat={this.selectCat}
                 selectOpt={this.selectOpt}
+                showImage={this.showImage}
                 selectedOpt={this.state[properties[category].alias]}
                 hasSelectedOpt={
                   this.state[category] !== "" ? this.state[category] : "empty"
@@ -208,7 +233,7 @@ class Main extends Component {
                 id="btnAtrasSave"
                 onClick={() => this.changeSteps("configurate")}
               >
-                Atras
+                Back
               </button>
             </Fragment>
           )
