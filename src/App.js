@@ -1,5 +1,4 @@
-import React, { Component, useState, useEffect, Fragment } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { useState } from "react";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import "./App.css";
@@ -14,7 +13,7 @@ const App = () => {
   };
 
   const loadConfig = newConfig => {
-    console.dir(newConfig);
+    //  console.dir(newConfig);
     setConfig(newConfig);
   };
 

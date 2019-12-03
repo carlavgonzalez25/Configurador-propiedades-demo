@@ -1,12 +1,21 @@
 import React from "react";
 
-export const Alert = (type, message) => {
+const Alert = ({ alert, closeAlert }) => {
   return (
-    <div class={"alert alert-dismissible alert-" + type}>
-      <button type="button" class="close" data-dismiss="alert">
-        &times;
-      </button>
-      <strong>{message}</strong>
-    </div>
+    alert !== null && (
+      <div class={"ctAlert alert alert-dismissible alert-" + alert.type}>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          onClick={closeAlert}
+        >
+          &times;
+        </button>
+        <strong>{alert.msg}</strong>
+      </div>
+    )
   );
 };
+
+export default Alert;

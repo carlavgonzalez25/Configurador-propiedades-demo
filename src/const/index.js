@@ -560,19 +560,19 @@ const configPrueba = {
   shingles: {
     name: "Heritage Shadow Grey",
     alias: "Shadow Grey",
-    image_url: "/static/media/ventana-2.dfab7081.PNG",
+    image_url: "static/media/ventana-2.dfab7081.PNG",
     type: "Standard"
   },
   tileThroughout: {
     name: "London Marfil 24x24",
     alias: "margil24x24",
-    image_url: "/static/media/ventana-2.dfab7081.PNG",
+    image_url: "static/media/ventana-2.dfab7081.PNG",
     type: "Premium"
   },
   showerFloorTile: {
     name: "Pebble Earth 12x12",
     alias: "pebbleEarth12x12",
-    image_url: "/static/media/ventana-3.9551e0b8.PNG",
+    image_url: "static/media/ventana-3.9551e0b8.PNG",
     type: "Standard"
   },
   cabinets: "",
@@ -581,7 +581,7 @@ const configPrueba = {
   bathroomFaucet: {
     name: "Eva Brushed Nickel",
     alias: "Eva brushed nickel",
-    image_url: "/static/media/ventana-3.9551e0b8.PNG",
+    image_url: "static/media/ventana-3.9551e0b8.PNG",
     type: "Standard"
   },
   interiorWallColor: "",
@@ -589,17 +589,17 @@ const configPrueba = {
   graniteEdge: {
     name: "Ogee",
     alias: "ogee",
-    image_url: "/static/media/ventana-1.74ee1d46.PNG",
+    image_url: "static/media/ventana-1.74ee1d46.PNG",
     type: "Premium"
   },
   grout: {
     name: "Havana Tan",
     alias: "havanaTan",
-    image_url: "/static/media/ventana-1.74ee1d46.PNG",
+    image_url: "static/media/ventana-1.74ee1d46.PNG",
     type: "Standard"
   },
   selected: "bathroomFaucet",
-  imgElegida: "/app/static/media/ventana-3.9551e0b8.PNG",
+  imgElegida: "static/media/ventana-3.9551e0b8.PNG",
   step: "save"
 };
 
