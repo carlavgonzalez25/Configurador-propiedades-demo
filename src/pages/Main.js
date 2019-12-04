@@ -7,6 +7,8 @@ import axios from "axios";
 import { properties } from "../const";
 import Alert from "../components/Alert";
 import Summary from "../components/Summary";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 
 class Main extends Component {
   state = {
@@ -46,7 +48,8 @@ class Main extends Component {
       selected: "",
       imgElegida: logoSolo,
       step: { der: "images", izq: "categories" },
-      alert: null
+      alert: null,
+      fileName: ""
     });
 
     console.log("config es " + this.props.config);
@@ -89,6 +92,19 @@ class Main extends Component {
 
   saveData = e => {
     e.preventDefault();
+
+    // para guardarlo necesitamos: nombre de usuario, nombre de proyecto (form)
+
+    let projects = JSON.parse(localStorage.getItem("projects"));
+    //console.log(jsonProjects + " type " + typeof jsonProjects);
+
+    // si el usuario existe, mostrar proyectos. Sino, mostrar vacio
+    if (projects.hasOwnProperty(this.props.selectedUser)) {
+      projects = projects[this.props.selectedUser].push(this.state.fileName);
+    } else this.setAlert("We have encountered a problem. Try again ", "danger");
+
+    /* todo esto funciona 
+
     const headers = {
       Accept: "application/json",
       "Content-Type": "application/json;charset=UTF-8"
@@ -125,14 +141,18 @@ class Main extends Component {
         //alert("Guardado");
       })
       .catch(error => {
-        this.setAlert("The file could not be saved, err " + error, "danger");
+        this.setAlert("The file could not be saved, error: " + error, "danger");
         // alert(error);
       });
+      */
   };
 
   changeSteps = (panel, step) => {
+    let newStep = this.state.step;
+    newStep[panel] = step;
+
     this.setState({
-      step: { [panel]: step }
+      step: newStep
     });
   };
 
@@ -142,7 +162,7 @@ class Main extends Component {
     });
     console.log("entro a cheqeuar el alert" + msg + " " + type);
 
-    setTimeout(() => this.setState({ alert: null }), 5000);
+    // setTimeout(() => this.setState({ alert: null }), 5000);
   };
 
   closeAlert = () => {
@@ -155,9 +175,24 @@ class Main extends Component {
         <div className="ctInterfaz d-flex flex-column justify-content-top align-items-start">
           <img src={logoHeader} alt="Logo hics" className="ctLogo" />
           <div
-            className="btnSummary d-flex justify-content-center align-items-center"
-            onClick={() => this.changeSteps("izq", "summary")}
+            className={
+              "btnSummary d-flex justify-content-center align-items-center " +
+              (this.state.step.izq === "categories" && "pointerCursor")
+            }
+            onClick={
+              this.state.step.izq === "categories"
+                ? () => this.changeSteps("izq", "summary")
+                : null
+            }
           >
+            {this.state.step.izq === "summary" && (
+              <span
+                className="ctArrowBack"
+                onClick={() => this.changeSteps("izq", "categories")}
+              >
+                <FontAwesomeIcon icon={faChevronLeft} />
+              </span>
+            )}
             <span>Summary</span>
           </div>
           {this.state.step.izq === "categories" &&
@@ -179,7 +214,7 @@ class Main extends Component {
               </li>
             ))}
           {this.state.step.izq === "summary" && (
-            <Summary options={this.state} names={properties["shingles"]} />
+            <Summary options={this.state} names={properties} />
           )}
         </div>
         {this.state.step.der === "images" ? (
@@ -216,12 +251,21 @@ class Main extends Component {
                 <fieldset className="w-75 m-5">
                   <legend>Save project</legend>
                   <div className="form-group">
-                    <label for="exampleInputEmail1">Email address</label>
+                    <div className="form-group">
+                      <label for="filename">Filename</label>
+                      <input
+                        className="form-control"
+                        id="filename"
+                        placeholder="Choose a name for your project"
+                        required
+                      ></input>
+                    </div>
+                    <label htmlFor="inputEmail">Email address</label>
                     <input
                       type="email"
                       className="form-control"
                       id="inputEmail"
-                      placeholder="Enter email"
+                      placeholder="Enter client's email"
                     />
                   </div>
                   <div className="form-group">
@@ -230,21 +274,21 @@ class Main extends Component {
                       type="name"
                       className="form-control"
                       id="inputName"
-                      placeholder="Enter name"
+                      placeholder="Enter client's name"
                     />
                   </div>
 
-                  <div class="form-group">
+                  <div className="form-group">
                     <label for="inputPhone">Phone</label>
                     <input
                       type="telephone"
                       className="form-control"
                       id="inputPhone"
-                      placeholder="Enter phone number"
+                      placeholder="Enter client's phone number"
                     />
                   </div>
 
-                  <div class="form-group">
+                  <div className="form-group">
                     <label for="description">Description</label>
                     <textarea
                       className="form-control"

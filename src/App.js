@@ -7,6 +7,7 @@ import "typeface-roboto";
 const App = () => {
   const [steps, setSteps] = useState("login");
   const [config, setConfig] = useState("");
+  const [selectedUser, setSelectedUser] = useState("");
 
   const changeSteps = step => {
     setSteps(step);
@@ -17,10 +18,26 @@ const App = () => {
     setConfig(newConfig);
   };
 
+  const loadUser = username => {
+    setSelectedUser(username);
+  };
+
   if (steps === "login") {
-    return <Login changeSteps={changeSteps} loadConfig={loadConfig} />;
+    return (
+      <Login
+        changeSteps={changeSteps}
+        loadConfig={loadConfig}
+        loadUser={loadUser}
+      />
+    );
   } else if (steps === "main") {
-    return <Main changeSteps={changeSteps} config={config} />;
+    return (
+      <Main
+        changeSteps={changeSteps}
+        config={config}
+        selectedUser={selectedUser}
+      />
+    );
   }
 };
 

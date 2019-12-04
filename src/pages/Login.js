@@ -3,11 +3,10 @@ import Spinner from "../layout/Spinner";
 import User from "../components/User";
 import Project from "../components/Project";
 import axios from "axios";
-import "../css/Login.css";
 import { configPrueba } from "../const";
 
 const Login = ({ changeSteps, loadConfig }) => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState("");
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState("");
@@ -23,6 +22,7 @@ const Login = ({ changeSteps, loadConfig }) => {
     setUsers(res.data); //.items ?
   */
   };
+
   const retrieveProjects = name => {
     setLoading(true);
 
@@ -39,62 +39,26 @@ const Login = ({ changeSteps, loadConfig }) => {
         setLoading(false);
       });
       */
-    const manuel = ["casa 1", "casa 2", "casa 3"];
-    const juan = ["Modelo parana 1", "Modelo Florida", "Cliente Juan Pedro"];
-    const pedro = ["Cliente John Doe modelo 1", "Modelo Parana John"];
-    const mario = [
-      "Modelo Florida 2",
-      "Cliente Johnson Modelo 3",
-      "Modelo Florida 4",
-      "Modelo Parana",
-      "Cliente Johnson"
-    ];
-    switch (name) {
-      case "manuel":
-        setProjects(manuel);
-        console.log("estoy en manuel");
-        break;
-      case "juan":
-        setProjects(juan);
-        break;
-      case "pedro":
-        setProjects(pedro);
-        break;
-      case "mario":
-        setProjects(mario);
-        break;
-      default:
-        setProjects("");
-        break;
-    }
+
+    let jsonProjects = JSON.parse(localStorage.getItem("projects"));
+    //console.log(jsonProjects + " type " + typeof jsonProjects);
+
+    jsonProjects.hasOwnProperty(name)
+      ? setProjects(jsonProjects[name])
+      : setProjects("");
+
     setSelected(name);
     setLoading(false);
     setScreen("projects");
   };
 
-  const createUser = username => {
-    // Crear usuario nuevo
-    /*
-    setLoading(true);
-    const headers = {
-      Accept: "application/json",
-      "Content-Type": "application/json;charset=UTF-8"
-    };
-
-    axios
-      .post("http://hicsbrightcapital.com/save.php", JSON.stringify(username), {
-        headers: headers
-      })
-      .then(res => {
-        console.log(" termine " + res.data);
-        setLoading(false);
-      });
-      */
-  };
-
   const createProject = name => {
     // Crear proyecto nuevo
     setLoading(true);
+
+    setLoading(false);
+
+    /*
     const headers = {
       Accept: "application/json",
       "Content-Type": "application/json;charset=UTF-8"
@@ -108,6 +72,7 @@ const Login = ({ changeSteps, loadConfig }) => {
         console.log(" termine " + res.data);
         setLoading(false);
       });
+      */
   };
 
   const selectProject = name => {
@@ -159,7 +124,7 @@ const Login = ({ changeSteps, loadConfig }) => {
     setUsername(newName);
   };
 
-  const submitUsername = e => {
+  const createUser = e => {
     e.preventDefault();
     if (username === "") {
       console.log("empty username");
@@ -186,19 +151,41 @@ const Login = ({ changeSteps, loadConfig }) => {
       setUsers(auxUsers);
       setSelected(username);
       setProjects("");
+      localStorage.setItem("users", JSON.stringify(auxUsers));
       setScreen("projects");
+      console.log(auxUsers + " users " + users);
     }
   };
 
   useEffect(() => {
-    // retrieve users here
-
     setLoading(true);
+
     //retrieveUsers()
 
-    // dummy data
-    const data = ["manuel", "juan", "pedro", "mario"];
-    setUsers(data);
+    //- dummy data . Para probar ahora
+    const data = ["Rafael", "Richard", "Pedro", "Fernando"];
+
+    //localStorage.removeItem("users");
+    //localStorage.setItem("users", JSON.stringify(data));
+
+    const proyectos = {
+      Rafael: ["casa 1", "casa 2", "casa 3"],
+      Richard: ["Modelo parana 1", "Modelo Florida", "Cliente Juan Pedro"],
+      Pedro: ["Cliente John Doe modelo 1", "Modelo Parana John"],
+      Fernando: [
+        "Modelo Florida 2",
+        "Cliente Johnson Modelo 3",
+        "Modelo Florida 4",
+        "Modelo Parana",
+        "Cliente Johnson"
+      ]
+    };
+
+    localStorage.getItem("projects") ||
+      localStorage.setItem("projects", JSON.stringify(proyectos)); // esto carga por primera vez
+
+    let jsonUsers = JSON.parse(localStorage.getItem("users"));
+    users === "" && setUsers(jsonUsers);
     setLoading(false);
 
     // eslint-disable-next-line
@@ -265,6 +252,7 @@ const Login = ({ changeSteps, loadConfig }) => {
               changeScreen={changeSteps}
               selectProject={selectProject}
             />
+
             {Object.keys(projects).map(name => (
               <Project
                 name={projects[name]}
@@ -302,7 +290,7 @@ const Login = ({ changeSteps, loadConfig }) => {
             <div className="valid-feedback" id="usernameFeedback"></div>
             <button
               type="submit"
-              onClick={submitUsername}
+              onClick={createUser}
               className="btn btn-secondary"
               id="submitUsername"
             >

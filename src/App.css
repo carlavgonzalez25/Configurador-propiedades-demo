@@ -16,6 +16,18 @@
   color: #09d3ac;
 }
 
+/* --------- LOGIN SCREEN ------------ */
+
+.ct-card:hover {
+  -webkit-box-shadow: 6px 1px 10px 0px rgba(196, 196, 196, 1);
+  -moz-box-shadow: 6px 1px 10px 0px rgba(196, 196, 196, 1);
+  box-shadow: 6px 1px 10px 0px rgba(196, 196, 196, 1);
+  cursor: pointer;
+  transform: translateX(-1px);
+}
+
+/* ---------  MAIN SCREEN ----------- */
+
 .ctLogo {
   margin: auto;
   margin-top: 20px;
@@ -52,10 +64,22 @@ li {
   box-shadow: none;
   background-color: #6f6f6f;
   transition: all 0.3s;
-  cursor: pointer;
 }
 .btnSummary span {
   color: white;
+}
+.pointerCursor {
+  cursor: pointer;
+}
+
+.ctArrowBack {
+  position: absolute;
+  left: 14px;
+  color: white;
+  cursor: pointer;
+  width: 20px;
+}
+.arrowBack {
 }
 
 .ftCategories:hover,
@@ -163,12 +187,12 @@ li {
   background-color: #c50000;
 }
 .ctAlert {
-  position: relative;
+  position: fixed;
+  top: 30%;
+  left: 40%;
   display: flex;
   width: 500px;
   height: 200px;
-  margin: auto;
-  margin-top: 200px;
 }
 .ctAlert strong {
   margin: auto;
