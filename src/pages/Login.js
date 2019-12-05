@@ -5,8 +5,8 @@ import Project from "../components/Project";
 import axios from "axios";
 import { configPrueba } from "../const";
 
-const Login = ({ changeSteps, loadConfig }) => {
-  const [users, setUsers] = useState("");
+const Login = ({ changeSteps, loadConfig, loadUser }) => {
+  const [users, setUsers] = useState([]);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selected, setSelected] = useState("");
@@ -40,14 +40,18 @@ const Login = ({ changeSteps, loadConfig }) => {
       });
       */
 
-    let jsonProjects = JSON.parse(localStorage.getItem("projects"));
-    //console.log(jsonProjects + " type " + typeof jsonProjects);
+    setSelected(name);
+    loadUser(name);
 
-    jsonProjects.hasOwnProperty(name)
+    let jsonProjects = JSON.parse(localStorage.getItem("projects"));
+
+    /* console.log("Se vuelve a ejecutar");
+    console.dir(jsonProjects);
+*/
+    jsonProjects.hasOwnProperty(name) // si el usuario existe, mostrar proyectos. Sino, mostrar vacio
       ? setProjects(jsonProjects[name])
       : setProjects("");
 
-    setSelected(name);
     setLoading(false);
     setScreen("projects");
   };
@@ -99,6 +103,7 @@ const Login = ({ changeSteps, loadConfig }) => {
 
   const deselectUser = () => {
     setSelected("");
+    loadUser("");
     setScreen("user");
   };
 
@@ -109,7 +114,7 @@ const Login = ({ changeSteps, loadConfig }) => {
   const checkUsername = e => {
     // falta comprobar que comience con numero, que no contenga caracteres raros
     let newName = e.target.value.replace(/ /g, "_");
-    console.log("new name " + newName + " value " + e.target.value);
+    // console.log("new name " + newName + " value " + e.target.value);
 
     if (newName.includes("_"))
       document.getElementById(
@@ -150,10 +155,14 @@ const Login = ({ changeSteps, loadConfig }) => {
       auxUsers.push(username);
       setUsers(auxUsers);
       setSelected(username);
+      loadUser(username);
       setProjects("");
       localStorage.setItem("users", JSON.stringify(auxUsers));
+      let auxProjects = JSON.parse(localStorage.getItem("projects"));
+      auxProjects[username] = [];
+      localStorage.setItem("projects", JSON.stringify(auxProjects));
       setScreen("projects");
-      console.log(auxUsers + " users " + users);
+      //console.log(auxUsers + " users " + users);
     }
   };
 
@@ -163,10 +172,10 @@ const Login = ({ changeSteps, loadConfig }) => {
     //retrieveUsers()
 
     //- dummy data . Para probar ahora
-    const data = ["Rafael", "Richard", "Pedro", "Fernando"];
+    const usuarios = ["Rafael", "Richard", "Pedro", "Fernando"];
 
     //localStorage.removeItem("users");
-    //localStorage.setItem("users", JSON.stringify(data));
+    //localStorage.removeItem("projects");
 
     const proyectos = {
       Rafael: ["casa 1", "casa 2", "casa 3"],
@@ -181,11 +190,16 @@ const Login = ({ changeSteps, loadConfig }) => {
       ]
     };
 
-    localStorage.getItem("projects") ||
+    if (!localStorage.getItem("projects")) {
       localStorage.setItem("projects", JSON.stringify(proyectos)); // esto carga por primera vez
+    }
 
     let jsonUsers = JSON.parse(localStorage.getItem("users"));
-    users === "" && setUsers(jsonUsers);
+    if (!localStorage.getItem("users")) {
+      localStorage.setItem("users", JSON.stringify(usuarios));
+      setUsers(usuarios);
+    } else setUsers(jsonUsers);
+
     setLoading(false);
 
     // eslint-disable-next-line
@@ -282,7 +296,7 @@ const Login = ({ changeSteps, loadConfig }) => {
             </label>
             <input
               type="text"
-              className="form-control is-valid"
+              className={"form-control /*is-valid*/"}
               id="userNameInput"
               value={username}
               onChange={checkUsername}

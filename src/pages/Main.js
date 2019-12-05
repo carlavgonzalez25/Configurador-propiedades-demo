@@ -49,11 +49,8 @@ class Main extends Component {
       imgElegida: logoSolo,
       step: { der: "images", izq: "categories" },
       alert: null,
-      fileName: ""
+      filename: ""
     });
-
-    console.log("config es " + this.props.config);
-    console.dir(properties);
 
     this.props.config !== "new" &&
       Object.keys(this.props.config).map(key => {
@@ -96,14 +93,25 @@ class Main extends Component {
     // para guardarlo necesitamos: nombre de usuario, nombre de proyecto (form)
 
     let projects = JSON.parse(localStorage.getItem("projects"));
-    //console.log(jsonProjects + " type " + typeof jsonProjects);
+    // console.log(" usuario selected " + this.props.selectedUser);
+    // console.dir(projects);
 
     // si el usuario existe, mostrar proyectos. Sino, mostrar vacio
     if (projects.hasOwnProperty(this.props.selectedUser)) {
-      projects = projects[this.props.selectedUser].push(this.state.fileName);
-    } else this.setAlert("We have encountered a problem. Try again ", "danger");
-
-    /* todo esto funciona 
+      projects[this.props.selectedUser].push(this.state.filename);
+      localStorage.setItem("projects", JSON.stringify(projects));
+      this.setAlert("Project Saved", "info");
+    } else if (this.state.filename === "")
+      this.setAlert("You have to specify a filename", "danger");
+    else {
+      this.setAlert(
+        "We have encountered a problem. Try again later " +
+          this.state.filename +
+          " " +
+          this.props.selectedUser,
+        "danger"
+      );
+    }
 
     const headers = {
       Accept: "application/json",
@@ -130,9 +138,10 @@ class Main extends Component {
     });
 
     console.log("data stringified: " + JSON.stringify(aux));
+    /*     // todo esto funciona
 
     axios
-      .post("http://hicsbrightcapital.com/save.php", JSON.stringify(aux), {
+      .post("https://hicsbrightcapital.com/save.php", JSON.stringify(aux), {
         headers: headers
       })
       .then(res => {
@@ -160,13 +169,19 @@ class Main extends Component {
     this.setState({
       alert: { msg: msg, type: type } //Esto se puede reescribir como alert: {msg, type}
     });
-    console.log("entro a cheqeuar el alert" + msg + " " + type);
-
-    // setTimeout(() => this.setState({ alert: null }), 5000);
+    //console.log("entro a cheqeuar el alert" + msg + " " + type);
+    this.alert !== null &&
+      setTimeout(() => this.setState({ alert: null }), 4000);
   };
 
   closeAlert = () => {
     this.setState({ alert: null });
+  };
+
+  checkFilename = e => {
+    this.setState({
+      filename: e.target.value
+    });
   };
 
   render() {
@@ -202,6 +217,11 @@ class Main extends Component {
                   name={properties[category].name}
                   alias={properties[category].alias}
                   options={properties[category].options}
+                  subOptions={
+                    properties[category].subOptions
+                      ? properties[category].subOptions
+                      : null
+                  }
                   selectedCat={this.state.selected}
                   selectCat={this.selectCat}
                   selectOpt={this.selectOpt}
@@ -223,7 +243,7 @@ class Main extends Component {
               <div className="ctImagen">
                 <img
                   src={this.state.imgElegida}
-                  alt="ventana 1"
+                  alt="Selected image"
                   className="imagen"
                 />
               </div>
@@ -258,6 +278,7 @@ class Main extends Component {
                         id="filename"
                         placeholder="Choose a name for your project"
                         required
+                        onChange={this.checkFilename}
                       ></input>
                     </div>
                     <label htmlFor="inputEmail">Email address</label>
