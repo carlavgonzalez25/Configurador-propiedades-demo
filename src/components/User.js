@@ -5,7 +5,7 @@ const User = ({ name }) => {
   return (
     <Fragment>
       <div className="card-body">
-        <h4 className="card-title">{name}</h4>
+        <h4 className="text-center">{name}</h4>
       </div>
     </Fragment>
   );
