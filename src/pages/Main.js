@@ -9,6 +9,7 @@ import Alert from "../components/Alert";
 import Summary from "../components/Summary";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import GeneralContext from "../context/general/generalContext";
 
 class Main extends Component {
   state = {

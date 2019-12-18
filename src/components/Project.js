@@ -1,8 +1,10 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import GeneralContext from "../context/general/generalContext";
 
-const Project = ({ name, changeScreen, selectProject }) => {
+const Project = ({ name, selectProject }) => {
+  const generalContext = useContext(GeneralContext);
   const [displayModels, setDisplayModels] = useState(false);
 
   const showModels = state => {
@@ -23,7 +25,7 @@ const Project = ({ name, changeScreen, selectProject }) => {
               ? () => showModels(true)
               : () => {
                   selectProject(name);
-                  changeScreen("main");
+                  generalContext.changeSteps("main");
                 }
           }
         >
@@ -47,7 +49,7 @@ const Project = ({ name, changeScreen, selectProject }) => {
             type="button"
             className="btn btn-outline-secondary w-100"
             onClick={() => {
-              changeScreen("main");
+              generalContext.changeSteps("main");
               selectProject("new");
             }}
           >
