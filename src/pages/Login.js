@@ -172,14 +172,13 @@ const Login = ({ changeSteps, loadConfig, loadUser }) => {
     //retrieveUsers()
 
     //- dummy data . Para probar ahora
-    const usuarios = ["Rafael", "Richard", "Pedro", "Fernando"];
+    const usuarios = ["Fernando", "Rafael", "Pedro"];
 
     //localStorage.removeItem("users");
     //localStorage.removeItem("projects");
 
     const proyectos = {
       Rafael: ["casa 1", "casa 2", "casa 3"],
-      Richard: ["Modelo parana 1", "Modelo Florida", "Cliente Juan Pedro"],
       Pedro: ["Cliente John Doe modelo 1", "Modelo Parana John"],
       Fernando: [
         "Modelo Florida 2",
@@ -213,11 +212,11 @@ const Login = ({ changeSteps, loadConfig, loadUser }) => {
       <Fragment>
         {//si no hay ningun user seleccionado
         users.length > 0 ? (
-          <div className="ctUsers container d-flex m-auto">
-            <div className="row justify-content-between align-items-center ml-lg-5 mr-lg-5 mt-lg-5 p-5">
+          <div className="ctUsers container d-flex flex-column m-auto">
+            <div className="row justify-content-between align-items-center d-flex flex-column ml-lg-5 mr-lg-5 mt-lg-5 p-5">
               {Object.keys(users).map(name => (
                 <div
-                  className="card text-white bg-primary mb-3 col-lg-3 col-5 mx-1 py-3 ct-card"
+                  className="card text-white bg-primary mb-3 col-lg-8 col-6 mx-1 ct-card"
                   onClick={() => retrieveProjects(users[name])}
                   key={name}
                 >
@@ -225,7 +224,7 @@ const Login = ({ changeSteps, loadConfig, loadUser }) => {
                 </div>
               ))}
               <div
-                className="card text-white bg-primary mb-3 col-lg-3 col-5 mx-1 py-3 ct-card" //Card crear nuevo usuario
+                className="card text-white bg-primary mb-3  col-lg-8 col-6 mx-1 ct-card" //Card crear nuevo usuario
                 onClick={() => changeScreen("newUser")}
               >
                 <User key="new" name="New User" />
@@ -289,7 +288,7 @@ const Login = ({ changeSteps, loadConfig, loadUser }) => {
         >
           Back
         </button>
-        <div className="container">
+        <div className="container mt-5 ">
           <div className="form-group has-success w-50 m-auto">
             <label className="form-control-label" htmlFor="userNameInput">
               Enter a user name
@@ -305,7 +304,7 @@ const Login = ({ changeSteps, loadConfig, loadUser }) => {
             <button
               type="submit"
               onClick={createUser}
-              className="btn btn-secondary"
+              className="btn btn-secondary w-100 mt-3"
               id="submitUsername"
             >
               Submit
