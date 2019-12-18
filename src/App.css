@@ -16,6 +16,10 @@
   color: #09d3ac;
 }
 
+#root {
+  min-height: 100vh;
+}
+
 /* --------- LOGIN SCREEN ------------ */
 
 .ct-card:hover {
@@ -24,6 +28,9 @@
   box-shadow: 6px 1px 10px 0px rgba(196, 196, 196, 1);
   cursor: pointer;
   transform: translateX(-1px);
+}
+.ctUsers {
+  min-height: 450px;
 }
 
 /* ---------  MAIN SCREEN ----------- */
@@ -45,6 +52,7 @@ li {
   -webkit-box-shadow: 6px 1px 10px 0px rgba(196, 196, 196, 1);
   -moz-box-shadow: 6px 1px 10px 0px rgba(196, 196, 196, 1);
   box-shadow: 6px 1px 10px 0px rgba(196, 196, 196, 1);
+  z-index: 9;
 }
 
 .ctInterfaz li {
@@ -79,7 +87,10 @@ li {
   cursor: pointer;
   width: 20px;
 }
-.arrowBack {
+
+.btnSelected {
+  background-color: #63686f;
+  color: white;
 }
 
 .ftCategories:hover,
@@ -155,7 +166,7 @@ li {
 .ctImagen {
   z-index: 0;
   margin-top: 20px;
-  background-image: url("./img/granite/santaCeciliaLight.jpg");
+  background-image: none;
 }
 .fondoSantaCecilia {
   background-image: url("./img/granite/santaCecilia.jpg");
@@ -176,7 +187,8 @@ li {
 }
 
 #btnAtrasMain,
-#btnAtrasSave {
+#btnAtrasSave,
+.btnAtras {
   position: fixed;
   right: 0;
 }

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import Main from "./pages/Main";
 import Login from "./pages/Login";
 import "./App.css";
 import "typeface-roboto";
+import Navbar from "./components/Navbar";
 
 const App = () => {
   const [steps, setSteps] = useState("login");
@@ -24,11 +25,15 @@ const App = () => {
 
   if (steps === "login") {
     return (
-      <Login
-        changeSteps={changeSteps}
-        loadConfig={loadConfig}
-        loadUser={loadUser}
-      />
+      <Fragment>
+        <Navbar />
+
+        <Login
+          changeSteps={changeSteps}
+          loadConfig={loadConfig}
+          loadUser={loadUser}
+        />
+      </Fragment>
     );
   } else if (steps === "main") {
     return (

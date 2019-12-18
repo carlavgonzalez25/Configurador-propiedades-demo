@@ -64,7 +64,7 @@ class Main extends Component {
       this.props.type // casa nueva o a editar? 
       this.props.data // data de la casa cargada
       this.props.model // modelo de casa
-      */
+    */
   }
 
   selectCat = nombre => {
@@ -98,9 +98,13 @@ class Main extends Component {
 
     // si el usuario existe, mostrar proyectos. Sino, mostrar vacio
     if (projects.hasOwnProperty(this.props.selectedUser)) {
-      projects[this.props.selectedUser].push(this.state.filename);
-      localStorage.setItem("projects", JSON.stringify(projects));
-      this.setAlert("Project Saved", "info");
+      if (this.state.filename === "")
+        this.setAlert("You have to specify a filename", "danger");
+      else {
+        projects[this.props.selectedUser].push(this.state.filename);
+        localStorage.setItem("projects", JSON.stringify(projects));
+        this.setAlert("Project Saved ", "info");
+      }
     } else if (this.state.filename === "")
       this.setAlert("You have to specify a filename", "danger");
     else {
@@ -127,6 +131,7 @@ class Main extends Component {
       console.log(" propiedad " + aux[key] + " key " + key);
 
       if (key !== "alert" && aux[key].hasOwnProperty("image_url")) {
+        //comparmos con alert porque vale NULL
         console.log("  url antes " + aux[key].image_url);
 
         aux[key].image_url = aux[key].image_url.replace(
@@ -134,6 +139,12 @@ class Main extends Component {
           "static"
         );
         console.log(" url modificada " + aux[key].image_url);
+      }
+      if (key !== "alert" && aux[key].hasOwnProperty("subOption")) {
+        aux[key].subOption.image_url = aux[key].subOption.image_url.replace(
+          "/app/static",
+          "static"
+        );
       }
     });
 
@@ -234,13 +245,13 @@ class Main extends Component {
               </li>
             ))}
           {this.state.step.izq === "summary" && (
-            <Summary options={this.state} names={properties} />
+            <Summary options={this.state} />
           )}
         </div>
         {this.state.step.der === "images" ? (
           <Fragment>
             <div className="ctDerecha">
-              <div className="ctImagen">
+              <div className="ctImagen" id="ctImagen">
                 <img
                   src={this.state.imgElegida}
                   alt="Selected image"
