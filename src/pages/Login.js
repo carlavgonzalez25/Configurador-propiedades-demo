@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment, useContext } from "react";
+import React, { useEffect, Fragment, useContext } from "react";
 import Spinner from "../layout/Spinner";
 import User from "../components/User";
 import Project from "../components/Project";
@@ -19,7 +19,6 @@ const Login = () => {
     retrieveProjects,
     deselectUser,
     createUser,
-    selectProject,
     checkUsername,
     selected
   } = loginContext;
@@ -112,14 +111,10 @@ const Login = () => {
             className=" card-body btn-group-vertical d-flex w-100 m-auto"
             dataToggle="buttons"
           >
-            <Project name="new" key="new" selectProject={selectProject} />
+            <Project name="new" key="new" />
 
             {Object.keys(projects).map(name => (
-              <Project
-                name={projects[name]}
-                key={name}
-                selectProject={selectProject}
-              />
+              <Project name={projects[name]} key={name} />
             ))}
           </div>
         </div>

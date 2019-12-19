@@ -2,10 +2,15 @@ import React, { Fragment, useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import GeneralContext from "../context/general/generalContext";
+import LoginContext from "../context/login/loginContext";
 
-const Project = ({ name, selectProject }) => {
+const Project = ({ name }) => {
   const generalContext = useContext(GeneralContext);
+  const loginContext = useContext(LoginContext);
   const [displayModels, setDisplayModels] = useState(false);
+
+  const { changeSteps } = generalContext;
+  const { selectProject } = loginContext;
 
   const showModels = state => {
     setDisplayModels(state);
@@ -25,7 +30,7 @@ const Project = ({ name, selectProject }) => {
               ? () => showModels(true)
               : () => {
                   selectProject(name);
-                  generalContext.changeSteps("main");
+                  changeSteps("main");
                 }
           }
         >
@@ -49,7 +54,7 @@ const Project = ({ name, selectProject }) => {
             type="button"
             className="btn btn-outline-secondary w-100"
             onClick={() => {
-              generalContext.changeSteps("main");
+              changeSteps("main");
               selectProject("new");
             }}
           >

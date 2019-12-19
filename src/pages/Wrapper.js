@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import Main from "../pages/Main";
 import Login from "../pages/Login";
 import "../App.css";
@@ -6,11 +6,14 @@ import "typeface-roboto";
 import Navbar from "../components/Navbar";
 import LoginState from "../context/login/LoginState";
 import GeneralContext from "../context/general/generalContext";
+import MainState from "../context/main/mainContext";
 
 const Wrapper = () => {
   const generalContext = useContext(GeneralContext);
 
-  return generalContext.steps === "login" ? (
+  const { changeSteps, config, selectedUser, steps } = generalContext;
+
+  return steps === "login" ? (
     <Fragment>
       <Navbar />
       <LoginState>
@@ -18,12 +21,14 @@ const Wrapper = () => {
       </LoginState>
     </Fragment>
   ) : (
-    generalContext.steps === "main" && (
-      <Main
-        changeSteps={generalContext.changeSteps}
-        config={generalContext.config}
-        selectedUser={generalContext.selectedUser}
-      />
+    steps === "main" && (
+      <MainState>
+        <Main
+          changeSteps={changeSteps}
+          config={config}
+          selectedUser={selectedUser}
+        />
+      </MainState>
     )
   );
 };

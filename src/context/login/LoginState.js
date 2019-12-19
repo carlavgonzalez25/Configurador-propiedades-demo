@@ -2,14 +2,7 @@ import React, { useReducer, useContext } from "react";
 import LoginContext from "./loginContext";
 import LoginReducer from "./loginReducer";
 import {
-  RETRIEVE_USERS,
-  RETRIEVE_PROJECTS,
-  CREATE_PROJECTS,
-  SELECT_PROJECT,
-  DESELECT_USER,
   CHANGE_SCREEN,
-  CHECK_USERNAME,
-  CREATE_USER,
   SET_LOADING,
   SET_USERNAME,
   SET_USERS,
