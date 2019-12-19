@@ -34,57 +34,13 @@ const Main = props => {
     loadConfig
   } = mainContext;
 
-  /*state = {
-    shingles: "",
-    tileThroughout: "",
-    showerFloorTile: "",
-    cabinets: "",
-    kitchenSink: "",
-    bathroomSink: "",
-    bathroomFaucet: "",
-    interiorWallColor: "",
-    exteriorWallColor: "",
-    graniteEdge: "",
-    grout: "",
-    selected: "",
-    imgElegida: logoSolo,
-    step: { der: "images", izq: "categories" },
-    alert: null
-  };*/
-
   useEffect(() => {
-    //console.dir(this.props.config);
-    //primero limpiar el state, luego cargar
-
-    /*this.setState({
-      shingles: "",
-      tileThroughout: "",
-      showerFloorTile: "",
-      cabinets: "",
-      kitchenSink: "",
-      bathroomSink: "",
-      bathroomFaucet: "",
-      interiorWallColor: "",
-      exteriorWallColor: "",
-      graniteEdge: "",
-      grout: "",
-      selected: "",
-      imgElegida: logoSolo,
-      step: { der: "images", izq: "categories" },
-      alert: null,
-      filename: ""
-    });*/
-
     clearState();
 
     config !== "new" &&
       Object.keys(config).map(key => {
         if (mainContext.hasOwnProperty(key) && key !== "step")
           loadConfig(key, config[key]);
-
-        /*this.setState({
-            [key]: this.props.config[key]
-          });*/
       });
   }, []);
 

@@ -67,51 +67,39 @@ const MainState = () => {
   selectOpt = (category, opciones) => {
     initialState.hasOwnProperty(category) &&
       dispatch({ type: SELECT_OPT, payload: { category, opciones } });
-    /*this.setState({
-        [category]: opciones,
-        imgElegida: opciones.image_url
-      });*/
+ 
   };
 
   showImage = opciones => {
     dispatch({ type: SHOW_IMAGE, payload: opciones.image_url });
-    /*this.setState({
-      imgElegida: opciones.image_url
-    });*/
+  
   };
 
   changeSteps = (panel, step) => {
     let newStep = state.step;
     newStep[panel] = step;
     dispatch({ type: CHANGE_STEPS, payload: newStep });
-    /*this.setState({
-      step: newStep
-    });*/
+    
   };
 
   setAlert = (msg, type) => {
     dispatch({type: SET_ALERT, payload: {msg, type}});  
-    /*this.setState({
-      alert: { msg: msg, type: type } //Esto se puede reescribir como alert: {msg, type}
-    });*/
-    //console.log("entro a cheqeuar el alert" + msg + " " + type);
+    
     state.alert !== null &&
-      setTimeout(() => dispatch({type: SET_ALERT, payload: null});//this.setState({ alert: null }), 4000);
+      setTimeout(() => dispatch({type: SET_ALERT, payload: null});
   };
 
   
 
   closeAlert = () => {
     dispatch({type: SET_ALERT, payload: null});
-    //this.setState({ alert: null });
+ 
   };
 
   checkFilename = e => {
     dispatch({type: CHECK_FILENAME, payload: e.target.value});
     
-    /*this.setState({
-      filename: e.target.value
-    });*/
+  
   };
 
   return (
