@@ -20,8 +20,8 @@ export default (state, action) => {
     case SELECT_OPT:
       return {
         ...state,
-        [action.payload.category]: opciones,
-        imgElegida: opciones.image_url
+        [action.payload.category]: action.payload.opciones,
+        imgElegida: action.payload.opciones.image_url
       };
     case SHOW_IMAGE:
       return { ...state, imgElegida: action.payload };

@@ -152,6 +152,7 @@ const Main = props => {
           Object.keys(properties).map(category => (
             <li key={properties[category].alias} className="list-group">
               <Categories
+                key={properties[category].alias}
                 name={properties[category].name}
                 alias={properties[category].alias}
                 options={properties[category].options}
@@ -191,7 +192,7 @@ const Main = props => {
             type="button"
             className="btn btn-secondary"
             id="btnAtrasMain"
-            onClick={() => this.props.changeSteps("login")}
+            onClick={() => generalContext.changeSteps("login")}
           >
             Atras
           </button>

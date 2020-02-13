@@ -109,7 +109,7 @@ const Login = () => {
           <div className="card-header">{selected}</div>
           <div
             className=" card-body btn-group-vertical d-flex w-100 m-auto"
-            dataToggle="buttons"
+            datatoggle="buttons"
           >
             <Project name="new" key="new" />
 

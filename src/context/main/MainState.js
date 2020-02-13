@@ -1,6 +1,7 @@
-import React from "react";
-import mainReducer from "./mainReducer";
-import mainContext from "./mainContext";
+import React, { useReducer } from "react";
+import MainReducer from "./mainReducer";
+import MainContext from "./mainContext";
+import { logoSolo } from "../../img";
 import {
   CLEAR_STATE,
   LOAD_CONFIG,
@@ -12,7 +13,7 @@ import {
   CHECK_FILENAME
 } from "../types";
 
-const MainState = () => {
+const MainState = props => {
   const initialState = {
     shingles: "",
     tileThroughout: "",
@@ -29,77 +30,70 @@ const MainState = () => {
     imgElegida: logoSolo,
     step: { der: "images", izq: "categories" },
     alert: null,
-    filename: ''
+    filename: ""
   };
 
   const [state, dispatch] = useReducer(MainReducer, initialState);
 
-  const clearState = dispatch({
-    type: CLEAR_STATE,
-    payload: {
-      shingles: "",
-      tileThroughout: "",
-      showerFloorTile: "",
-      cabinets: "",
-      kitchenSink: "",
-      bathroomSink: "",
-      bathroomFaucet: "",
-      interiorWallColor: "",
-      exteriorWallColor: "",
-      graniteEdge: "",
-      grout: "",
-      selected: "",
-      imgElegida: logoSolo,
-      step: { der: "images", izq: "categories" },
-      alert: null,
-      filename: ''
-    }
-  });
+  const clearState = () =>
+    dispatch({
+      type: CLEAR_STATE,
+      payload: {
+        shingles: "",
+        tileThroughout: "",
+        showerFloorTile: "",
+        cabinets: "",
+        kitchenSink: "",
+        bathroomSink: "",
+        bathroomFaucet: "",
+        interiorWallColor: "",
+        exteriorWallColor: "",
+        graniteEdge: "",
+        grout: "",
+        selected: "",
+        imgElegida: logoSolo,
+        step: { der: "images", izq: "categories" },
+        alert: null,
+        filename: ""
+      }
+    });
 
   const loadConfig = (key, value) => {
     dispatch({ type: LOAD_CONFIG, payload: { key, value } });
   };
 
-  selectCat = nombre => {
+  const selectCat = nombre => {
     dispatch({ type: SELECT_CAT, payload: nombre });
   };
 
-  selectOpt = (category, opciones) => {
+  const selectOpt = (category, opciones) => {
     initialState.hasOwnProperty(category) &&
       dispatch({ type: SELECT_OPT, payload: { category, opciones } });
- 
   };
 
-  showImage = opciones => {
+  const showImage = opciones => {
     dispatch({ type: SHOW_IMAGE, payload: opciones.image_url });
-  
   };
 
-  changeSteps = (panel, step) => {
+  const changeSteps = (panel, step) => {
     let newStep = state.step;
     newStep[panel] = step;
     dispatch({ type: CHANGE_STEPS, payload: newStep });
-    
   };
 
-  setAlert = (msg, type) => {
-    dispatch({type: SET_ALERT, payload: {msg, type}});  
-    
+  const setAlert = (msg, type) => {
+    dispatch({ type: SET_ALERT, payload: { msg, type } });
+
     state.alert !== null &&
-      setTimeout(() => dispatch({type: SET_ALERT, payload: null});
+      setTimeout(() => dispatch({ type: SET_ALERT, payload: null }));
   };
 
-  
-
-  closeAlert = () => {
-    dispatch({type: SET_ALERT, payload: null});
- 
+  const closeAlert = () => {
+    dispatch({ type: SET_ALERT, payload: null });
   };
 
-  checkFilename = e => {
-    dispatch({type: CHECK_FILENAME, payload: e.target.value});
-    
-  
+  const checkFilename = e => {
+    dispatch({ type: CHECK_FILENAME, payload: e.target.value });
   };
 
   return (
