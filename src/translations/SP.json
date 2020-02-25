@@ -1,0 +1,33 @@
+{
+  "buttons": {
+    "back": "Atras",
+    "save": "Guardar",
+    "create": "Crear",
+    "summary": "Resumen",
+    "submit": "Enviar"
+  },
+  "models": {
+    "select": "Seleccionar Modelo",
+    "parana": "Modelo Paraná",
+    "capeCoral": "Modelo Cape Coral"
+  },
+  "categories": {
+    "shingles": "Tejados: Productos Tamko building",
+    "subcat": {
+      "rusticHickory": "Heritage Rustic Hickory",
+      "shadowGrey": "Heritage Shadow Grey",
+      "glacierWhite": "Heritage Glacier White",
+      "rusticEvergreen": "Heritage premium - Rustic Evergreen",
+      "englishPewter": "Heritage premium - Olde English Pewter",
+      "blackWalnut": "Heritage premium - Black Walnut"
+    }
+  },
+  "saveForm": {
+    "title": "Guardar Proyecto",
+    "name": "Nombre",
+    "phone": "Teléfono",
+    "mail": "Mail",
+    "description": "Descripción",
+    "filename": "Nombre de Archivo"
+  }
+}

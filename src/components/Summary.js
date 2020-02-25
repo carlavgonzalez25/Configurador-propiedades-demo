@@ -8,7 +8,7 @@ const Summary = options => {
         key =>
           options.options[key] !== null &&
           options.options[key].hasOwnProperty("name") && (
-            <div className="d-flex w-100">
+            <div className="d-flex w-100" key={options.options[key]}>
               <div
                 className={
                   "ftCategories list-group-item list-group-item-action "

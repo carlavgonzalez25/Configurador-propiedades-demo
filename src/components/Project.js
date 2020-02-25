@@ -1,9 +1,18 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import GeneralContext from "../context/general/generalContext";
+import LoginContext from "../context/login/loginContext";
+import * as translationEN from "../translations/EN";
+import * as translationSP from "../translations/SP";
 
-const Project = ({ name, changeScreen, selectProject }) => {
+const Project = ({ name }) => {
+  const generalContext = useContext(GeneralContext);
+  const loginContext = useContext(LoginContext);
   const [displayModels, setDisplayModels] = useState(false);
+
+  const { changeSteps } = generalContext;
+  const { selectProject } = loginContext;
 
   const showModels = state => {
     setDisplayModels(state);
@@ -23,7 +32,7 @@ const Project = ({ name, changeScreen, selectProject }) => {
               ? () => showModels(true)
               : () => {
                   selectProject(name);
-                  changeScreen("main");
+                  changeSteps("main");
                 }
           }
         >
@@ -38,20 +47,37 @@ const Project = ({ name, changeScreen, selectProject }) => {
       )}
       {displayModels && (
         <div class="form-group w-100">
-          <label htmlFor="selectModel">Select Model</label>
+          <label htmlFor="selectModel">
+            {generalContext.language === "EN"
+              ? translationEN.models.select
+              : generalContext.language === "SP" && translationSP.models.select}
+          </label>
           <select class="form-control w-100" id="selectModel">
-            <option>Modelo Parana</option>
-            <option>Modelo Cape Coral</option>
+            <option>
+              {generalContext.language === "EN"
+                ? translationEN.models.parana
+                : generalContext.language === "SP" &&
+                  translationSP.models.parana}
+            </option>
+            <option>
+              {generalContext.language === "EN"
+                ? translationEN.models.capeCoral
+                : generalContext.language === "SP" &&
+                  translationSP.models.capeCoral}
+            </option>
           </select>
           <button
             type="button"
             className="btn btn-outline-secondary w-100"
             onClick={() => {
-              changeScreen("main");
+              changeSteps("main");
               selectProject("new");
             }}
           >
-            Create
+            {generalContext.language === "EN"
+              ? translationEN.buttons.create
+              : generalContext.language === "SP" &&
+                translationSP.buttons.create}
           </button>
         </div>
       )}

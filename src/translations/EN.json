@@ -1,0 +1,33 @@
+{
+  "buttons": {
+    "back": "Back",
+    "save": "Save",
+    "create": "Create",
+    "summary": "Summary",
+    "submit": "Submit"
+  },
+  "models": {
+    "select": "Select Model",
+    "parana": "Parana Model",
+    "capeCoral": "Cape Coral Model"
+  },
+  "categories": {
+    "shingles": "Shingles: Tamko building products",
+    "subcat": {
+      "rusticHickory": "Heritage Rustic Hickory",
+      "shadowGrey": "Heritage Shadow Grey",
+      "glacierWhite": "Heritage Glacier White",
+      "rusticEvergreen": "Heritage premium - Rustic Evergreen",
+      "englishPewter": "Heritage premium - Olde English Pewter",
+      "blackWalnut": "Heritage premium - Black Walnut"
+    }
+  },
+  "saveForm": {
+    "title": "Save Project",
+    "name": "Name",
+    "phone": "Phone",
+    "mail": "Mail",
+    "description": "Description",
+    "filename": "Filename"
+  }
+}
