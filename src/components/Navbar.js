@@ -17,6 +17,7 @@ const Navbar = () => {
         <Flags key="SP" name="SP" />
         <Flags key="EN" name="EN" />
       </div>
+
     </nav>
   );
 };

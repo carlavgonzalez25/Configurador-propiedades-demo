@@ -35,6 +35,10 @@ const Login = () => {
     //- dummy data . Para probar ahora
     const usuarios = ["Fernando", "Rafael", "Pedro"];
 
+
+    //localStorage.removeItem("users");
+    //localStorage.removeItem("projects");
+
     const proyectos = {
       Rafael: ["casa 1", "casa 2", "casa 3"],
       Pedro: ["Cliente John Doe modelo 1", "Modelo Parana John"],
@@ -110,6 +114,7 @@ const Login = () => {
           {generalContext.language === "EN"
             ? translationEN.buttons.back
             : generalContext.language === "SP" && translationSP.buttons.back}
+
         </button>
         <div className="ct-projects card text-white bg-primary mt-5 mx-auto w-50">
           <div className="card-header">{selected}</div>
@@ -137,6 +142,7 @@ const Login = () => {
           {generalContext.language === "EN"
             ? translationEN.buttons.back
             : generalContext.language === "SP" && translationSP.buttons.back}
+
         </button>
         <div className="container mt-5 ">
           <div className="form-group has-success w-50 m-auto">

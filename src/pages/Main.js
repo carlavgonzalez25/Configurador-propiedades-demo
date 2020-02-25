@@ -36,6 +36,7 @@ const Main = props => {
     loadConfig
   } = mainContext;
 
+
   useEffect(() => {
     clearState();
 
@@ -65,6 +66,7 @@ const Main = props => {
       }
     } else if (filename === "")
       setAlert("You have to specify a filename", "danger");
+
     else {
       setAlert(
         "We have encountered a problem. Try again later " +
@@ -190,6 +192,7 @@ const Main = props => {
           <div className="ctDerecha">
             <div className="ctImagen" id="ctImagen">
               <img src={imgElegida} alt="Selected " className="imagen" />
+
             </div>
             <button
               type="submit"
