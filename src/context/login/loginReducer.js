@@ -21,9 +21,6 @@ export default (state, action) => {
       return { ...state, users: action.payload };
     case SET_PROJECTS:
       return { ...state, projects: action.payload };
-    case SET_SELECTED:
-      return { ...state, selected: action.payload };
-
     default:
       return state;
   }

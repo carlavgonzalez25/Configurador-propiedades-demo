@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import Wrapper from "./pages/Wrapper";
 
 import GeneralState from "./context/general/GeneralState";

@@ -10,6 +10,7 @@ export const SET_PROJECTS = "SET_PROJECTS";
 export const LOAD_CONFIG = "LOAD_CONFIG";
 export const LOAD_USER = "LOAD_USER";
 export const CHANGE_STEPS = "CHANGE_STEPS";
+export const CHANGE_LANGUAGE = "CHANGE_LANGUAGE";
 
 // Main types
 

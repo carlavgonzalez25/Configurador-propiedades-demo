@@ -3,9 +3,13 @@ import Spinner from "../layout/Spinner";
 import User from "../components/User";
 import Project from "../components/Project";
 import LoginContext from "../context/login/loginContext";
+import GeneralContext from "../context/general/generalContext";
+import * as translationEN from "../translations/EN";
+import * as translationSP from "../translations/SP";
 
 const Login = () => {
   const loginContext = useContext(LoginContext);
+  const generalContext = useContext(GeneralContext);
 
   const {
     setLoading,
@@ -103,7 +107,9 @@ const Login = () => {
           className="btn btn-secondary btnAtras"
           onClick={deselectUser}
         >
-          Back
+          {generalContext.language === "EN"
+            ? translationEN.buttons.back
+            : generalContext.language === "SP" && translationSP.buttons.back}
         </button>
         <div className="ct-projects card text-white bg-primary mt-5 mx-auto w-50">
           <div className="card-header">{selected}</div>
@@ -128,7 +134,9 @@ const Login = () => {
           className="btn btn-secondary btnAtras"
           onClick={deselectUser}
         >
-          Back
+          {generalContext.language === "EN"
+            ? translationEN.buttons.back
+            : generalContext.language === "SP" && translationSP.buttons.back}
         </button>
         <div className="container mt-5 ">
           <div className="form-group has-success w-50 m-auto">
@@ -149,7 +157,10 @@ const Login = () => {
               className="btn btn-secondary w-100 mt-3"
               id="submitUsername"
             >
-              Submit
+              {generalContext.language === "EN"
+                ? translationEN.buttons.submit
+                : generalContext.language === "SP" &&
+                  translationSP.buttons.submit}
             </button>
           </div>
         </div>

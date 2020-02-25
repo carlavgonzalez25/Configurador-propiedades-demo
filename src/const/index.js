@@ -34,7 +34,6 @@ import {
   rectangle,
   ventana1,
   ventana2,
-  ventana3,
   radius,
   fullBullnose,
   flat,

@@ -1,18 +1,18 @@
 {
   "buttons": {
-    "back": "Back",
-    "save": "Save",
-    "create": "Create",
-    "summary": "Summary",
-    "submit": "Submit"
+    "back": "Atras",
+    "save": "Guardar",
+    "create": "Crear",
+    "summary": "Resumen",
+    "submit": "Enviar"
   },
   "models": {
-    "select": "Select Model",
-    "parana": "Parana Model",
-    "capeCoral": "Cape Coral Model"
+    "select": "Seleccionar Modelo",
+    "parana": "Modelo Paraná",
+    "capeCoral": "Modelo Cape Coral"
   },
   "categories": {
-    "shingles": "Shingles: Tamko building products",
+    "shingles": "Tejados: Productos Tamko building",
     "subcat": {
       "rusticHickory": "Heritage Rustic Hickory",
       "shadowGrey": "Heritage Shadow Grey",
@@ -23,11 +23,11 @@
     }
   },
   "saveForm": {
-    "title": "Save Project",
-    "name": "Name",
-    "phone": "Phone",
+    "title": "Guardar Proyecto",
+    "name": "Nombre",
+    "phone": "Teléfono",
     "mail": "Mail",
-    "description": "Description",
-    "filename": "Filename"
+    "description": "Descripción",
+    "filename": "Nombre de Archivo"
   }
 }

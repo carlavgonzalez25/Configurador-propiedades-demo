@@ -1,5 +1,6 @@
 import React from "react";
 import { logoHeader } from "../img";
+import Flags from "../components/Flags";
 
 const Navbar = () => {
   return (
@@ -12,6 +13,10 @@ const Navbar = () => {
           alt=""
         />
       </a>
+      <div>
+        <Flags key="SP" name="SP" />
+        <Flags key="EN" name="EN" />
+      </div>
     </nav>
   );
 };

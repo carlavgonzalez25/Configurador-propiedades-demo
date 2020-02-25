@@ -1,13 +1,19 @@
 import React, { useReducer } from "react";
 import GeneralContext from "./generalContext";
 import GeneralReducer from "./generalReducer";
-import { CHANGE_STEPS, LOAD_CONFIG, LOAD_USER } from "../types";
+import {
+  CHANGE_STEPS,
+  LOAD_CONFIG,
+  LOAD_USER,
+  CHANGE_LANGUAGE
+} from "../types";
 
 const GeneralState = props => {
   const initialState = {
     steps: "login",
     config: "",
-    selectedUser: ""
+    selectedUser: "",
+    language: "EN"
   };
 
   const [state, dispatch] = useReducer(GeneralReducer, initialState);
@@ -27,6 +33,10 @@ const GeneralState = props => {
     //setSelectedUser(username);
   };
 
+  const changeLanguage = language => {
+    dispatch({ type: CHANGE_LANGUAGE, payload: language });
+  };
+
   return (
     <GeneralContext.Provider
       value={{
@@ -34,7 +44,9 @@ const GeneralState = props => {
         steps: state.steps,
         config: state.config,
         loadConfig,
-        loadUser
+        loadUser,
+        language: state.language,
+        changeLanguage
       }}
     >
       {props.children}
